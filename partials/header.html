@@ -3,10 +3,10 @@
     
     <nav>
         <ul class="nav">
-            <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="services.html">Services</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="index.html" id="home-link">Home</a></li>
+            <li><a href="services.html" id="services-link">Services</a></li>
+            <li><a href="about.html" id="about-link">About</a></li>
+            <li><a href="contact.html" id="contact-link">Contact</a></li>
         </ul>
     </nav>
     
@@ -23,4 +23,25 @@ function switchLanguage(lang) {
     console.log('Switching to language:', lang);
     // Here you would implement actual language switching logic
 }
+
+// Set active navigation based on current page
+document.addEventListener('DOMContentLoaded', function() {
+    // Remove active class from all nav links
+    const navLinks = document.querySelectorAll('.nav a');
+    navLinks.forEach(link => link.classList.remove('active'));
+    
+    // Get current page filename
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    
+    // Set active class based on current page
+    if (currentPage === 'index.html' || currentPage === '') {
+        document.getElementById('home-link').classList.add('active');
+    } else if (currentPage === 'services.html') {
+        document.getElementById('services-link').classList.add('active');
+    } else if (currentPage === 'about.html') {
+        document.getElementById('about-link').classList.add('active');
+    } else if (currentPage === 'contact.html') {
+        document.getElementById('contact-link').classList.add('active');
+    }
+});
 </script>
