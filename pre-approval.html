@@ -1642,9 +1642,13 @@
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     
     <script>
-        // Initialize EmailJS
+        // Initialize EmailJS with your public key
+        const EMAILJS_PUBLIC_KEY = "-avhmJx6qDe7amnuB"; // Reemplaza con tu clave pública de EmailJS
+        const EMAILJS_SERVICE_ID = "service_vunkhec";
+        const EMAILJS_TEMPLATE_ID = "template_jxc0fi4";
+        
         (function(){
-            emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
+            emailjs.init(EMAILJS_PUBLIC_KEY);
         })();
 
         let currentSlideIndex = 0;
@@ -1922,6 +1926,11 @@
 
         function submitForm() {
             // Final validation
+            if (!validateCurrentSlide()) {
+                return;
+            }
+
+            // Save current slide data
             saveCurrentSlideData();
 
             // Add signature to form data
@@ -1929,28 +1938,170 @@
                 formData.signature = signatureData;
             }
 
-            // Prepare email template parameters
+            // Add current date
+            const currentDate = new Date().toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            // Collect all form data for EmailJS
+            const allFormData = getAllFormData();
+
+            // Prepare email template parameters with all collected data
             const templateParams = {
-                to_name: 'Sonia Crespo',
-                from_name: formData.borrowerName || 'Unknown',
-                borrower_name: formData.borrowerName,
-                mobile_phone: formData.mobilePhone,
-                email_address: formData.emailAddress,
-                signature: signatureData,
-                // Add all other form fields here
-                form_data: JSON.stringify(formData, null, 2)
+                // Información básica
+                borrower_name: allFormData.borrowerName || '',
+                mobile_phone: allFormData.mobilePhone || '',
+                email_address: allFormData.emailAddress || '',
+                date_of_birth: allFormData.dateOfBirth || '',
+                social_security: allFormData.socialSecurity || '',
+                marital_status: allFormData.maritalStatus || '',
+                dependents: allFormData.dependents || '',
+                
+                // Información del préstamo
+                who_applying: allFormData.whoApplying || '',
+                property_description: allFormData.propertyDescription || '',
+                loan_purpose: allFormData.loanPurpose || '',
+                loan_amount: allFormData.loanAmount || '',
+                
+                // Dirección
+                street_address: allFormData.streetAddress || '',
+                street_address2: allFormData.streetAddress2 || '',
+                city: allFormData.city || '',
+                state_province: allFormData.stateProvince || '',
+                postal_code: allFormData.postalCode || '',
+                lived_two_years: allFormData.livedTwoYears || '',
+                
+                // Historial hipotecario
+                mortgage_history: Array.isArray(allFormData.mortgageHistory) ? 
+                    allFormData.mortgageHistory.join(', ') : (allFormData.mortgageHistory || ''),
+                
+                // Empleo e ingresos
+                is_retired: allFormData.isRetired || '',
+                income_source: allFormData.incomeSource || '',
+                social_security_income: allFormData.socialSecurityIncome || '0',
+                disability_income: allFormData.disabilityIncome || '0',
+                annuities_pensions: allFormData.annuitiesPensions || '0',
+                third_party_income: allFormData.thirdPartyIncome || '0',
+                
+                // Co-solicitante
+                co_borrower: allFormData.coBorrower || '',
+                
+                // Información legal
+                us_citizen: allFormData.usCitizen || '',
+                outstanding_judgements: allFormData.outstandingJudgements || '',
+                active_lawsuit: allFormData.activeLawsuit || '',
+                irs_tax_lien: allFormData.irsTaxLien || '',
+                deferred_student_loans: allFormData.deferredStudentLoans || '',
+                
+                // Marketing
+                hear_about_us: allFormData.hearAboutUs || '',
+                
+                // Autorizaciones
+                credit_authorization: allFormData.creditAuthorization || '',
+                patriot_act: allFormData.patriotAct || '',
+                electronic_disclosure: allFormData.electronicDisclosure || '',
+                final_acknowledgement: allFormData.finalAcknowledgement || '',
+                
+                // Firma y metadatos
+                signature: signatureData || '',
+                submission_date: currentDate,
+                form_data: JSON.stringify(allFormData, null, 2)
             };
 
+            // Show loading message
+            showLoadingMessage();
+
             // Send email using EmailJS
-            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
                 .then(function(response) {
                     console.log('SUCCESS!', response.status, response.text);
-                    // Show success message
                     showSuccessMessage();
                 }, function(error) {
                     console.log('FAILED...', error);
-                    alert('There was an error submitting your application. Please try again.');
+                    showErrorMessage();
                 });
+        }
+
+        function getAllFormData() {
+            // Get all form inputs from all slides
+            const allInputs = document.querySelectorAll('input, select, textarea');
+            const completeFormData = {};
+            
+            allInputs.forEach(input => {
+                if (input.name && input.name !== '') {
+                    if (input.type === 'checkbox') {
+                        if (!completeFormData[input.name]) {
+                            completeFormData[input.name] = [];
+                        }
+                        if (input.checked) {
+                            completeFormData[input.name].push(input.value);
+                        }
+                    } else if (input.type === 'radio') {
+                        if (input.checked) {
+                            completeFormData[input.name] = input.value;
+                        }
+                    } else {
+                        completeFormData[input.name] = input.value;
+                    }
+                }
+            });
+
+            // Special handling for mortgage history checkboxes
+            const mortgageCheckboxes = document.querySelectorAll('input[name="mortgageHistory"]');
+            const selectedMortgageHistory = [];
+            mortgageCheckboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selectedMortgageHistory.push(checkbox.value);
+                }
+            });
+            if (selectedMortgageHistory.length > 0) {
+                completeFormData.mortgageHistory = selectedMortgageHistory;
+            }
+
+            return completeFormData;
+        }
+
+        function showLoadingMessage() {
+            const container = document.querySelector('.pre-approval-container');
+            container.innerHTML = `
+                <div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; text-align: center; color: white; padding: 2rem;">
+                    <div>
+                        <div style="font-size: 4rem; margin-bottom: 2rem; animation: spin 2s linear infinite;">⏳</div>
+                        <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Enviando Aplicación...</h1>
+                        <p style="font-size: 1.2rem; opacity: 0.9;">
+                            Por favor espere mientras procesamos su información.
+                        </p>
+                    </div>
+                </div>
+                <style>
+                @keyframes spin {
+                    0% { transform: rotate(0deg); }
+                    100% { transform: rotate(360deg); }
+                }
+                </style>
+            `;
+        }
+
+        function showErrorMessage() {
+            const container = document.querySelector('.pre-approval-container');
+            container.innerHTML = `
+                <div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; text-align: center; color: white; padding: 2rem;">
+                    <div>
+                        <div style="font-size: 4rem; margin-bottom: 2rem;">❌</div>
+                        <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Error al Enviar</h1>
+                        <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
+                            Hubo un problema enviando su aplicación. Por favor, inténtelo de nuevo.
+                        </p>
+                        <button onclick="location.reload()" style="display: inline-block; padding: 1rem 2rem; background: white; color: #1E4E8C; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">
+                            Intentar de Nuevo
+                        </button>
+                    </div>
+                </div>
+            `;
         }
 
         function showSuccessMessage() {
@@ -1959,12 +2110,12 @@
                 <div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; text-align: center; color: white; padding: 2rem;">
                     <div>
                         <div style="font-size: 4rem; margin-bottom: 2rem;">✅</div>
-                        <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Application Submitted Successfully!</h1>
+                        <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">¡Aplicación Enviada Exitosamente!</h1>
                         <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
-                            Thank you for your application. Sonia Crespo will review your information and contact you within 24 hours.
+                            Gracias por su aplicación. Sonia Crespo revisará su información y se contactará con usted dentro de 24 horas.
                         </p>
                         <a href="index.html" style="display: inline-block; padding: 1rem 2rem; background: white; color: #1E4E8C; text-decoration: none; border-radius: 10px; font-weight: 600; transition: all 0.3s ease;">
-                            Return to Home
+                            Regresar al Inicio
                         </a>
                     </div>
                 </div>

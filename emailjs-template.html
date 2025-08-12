@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Aplicación de Pre-Aprobación de Préstamo - {{borrower_name}}</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .header { background: #1E4E8C; color: white; padding: 20px; text-align: center; }
+        .content { padding: 20px; }
+        .section { margin-bottom: 25px; }
+        .question { font-weight: bold; color: #1E4E8C; margin-bottom: 10px; }
+        .answer { background: #f8f9fa; padding: 10px; border-left: 4px solid #1E4E8C; margin-bottom: 15px; }
+        .signature { border: 1px solid #ddd; padding: 10px; max-width: 100%; }
+        .address { background: #e3f2fd; padding: 15px; border-radius: 5px; }
+        .income-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .mortgage-history { background: #fff3cd; padding: 15px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>2025 ONLINE 1003 APPLICATION - SONIA CRESPO</h1>
+        <h2>Aplicación de Pre-Aprobación Recibida</h2>
+        <p>Fecha: {{submission_date}}</p>
+    </div>
+
+    <div class="content">
+        <!-- Información Básica del Solicitante -->
+        <div class="section">
+            <h3>📋 INFORMACIÓN BÁSICA DEL SOLICITANTE</h3>
+            
+            <div class="question">1. Nombre del Solicitante:</div>
+            <div class="answer">{{borrower_name}}</div>
+
+            <div class="question">2. Información de Contacto:</div>
+            <div class="answer">
+                <strong>Teléfono Móvil:</strong> {{mobile_phone}}<br>
+                <strong>Correo Electrónico:</strong> {{email_address}}
+            </div>
+
+            <div class="question">4. Fecha de Nacimiento del Solicitante Principal:</div>
+            <div class="answer">{{date_of_birth}}</div>
+
+            <div class="question">5. Número de Seguridad Social:</div>
+            <div class="answer">{{social_security}}</div>
+
+            <div class="question">6. Estado Civil:</div>
+            <div class="answer">{{marital_status}}</div>
+
+            <div class="question">7. Dependientes:</div>
+            <div class="answer">{{dependents}}</div>
+        </div>
+
+        <!-- Información del Préstamo -->
+        <div class="section">
+            <h3>🏠 INFORMACIÓN DEL PRÉSTAMO</h3>
+            
+            <div class="question">3. Información del Préstamo del Solicitante:</div>
+            <div class="answer">
+                <strong>¿Quién está solicitando este préstamo?:</strong> {{who_applying}}<br>
+                <strong>Descripción de la Propiedad:</strong> {{property_description}}<br>
+                <strong>Propósito del Préstamo:</strong> {{loan_purpose}}<br>
+                <strong>Monto del Préstamo Solicitado:</strong> ${{loan_amount}}
+            </div>
+        </div>
+
+        <!-- Dirección Actual -->
+        <div class="section">
+            <h3>📍 DIRECCIÓN ACTUAL</h3>
+            
+            <div class="question">8. Su Dirección de Propiedad Actual:</div>
+            <div class="answer address">
+                <strong>Dirección:</strong> {{street_address}}<br>
+                {{#street_address2}}<strong>Dirección Línea 2:</strong> {{street_address2}}<br>{{/street_address2}}
+                <strong>Ciudad:</strong> {{city}}<br>
+                <strong>Estado/Provincia:</strong> {{state_province}}<br>
+                <strong>Código Postal:</strong> {{postal_code}}
+            </div>
+
+            <div class="question">9. ¿Ha vivido en esa dirección por más de dos años?</div>
+            <div class="answer">{{lived_two_years}}</div>
+        </div>
+
+        <!-- Historial Hipotecario -->
+        <div class="section">
+            <h3>📊 HISTORIAL HIPOTECARIO</h3>
+            
+            <div class="question">10. Historial de Eventos Hipotecarios del Solicitante (últimos 7 años):</div>
+            <div class="answer mortgage-history">{{mortgage_history}}</div>
+        </div>
+
+        <!-- Información de Empleo e Ingresos -->
+        <div class="section">
+            <h3>💼 EMPLEO E INGRESOS</h3>
+            
+            <div class="question">11. ¿Está jubilado el Solicitante Principal?</div>
+            <div class="answer">{{is_retired}}</div>
+
+            <div class="question">12. ¿Fuente principal de ingresos del solicitante?</div>
+            <div class="answer">{{income_source}}</div>
+
+            <div class="question">13. Ingresos de Jubilación del Solicitante Principal:</div>
+            <div class="answer income-grid">
+                <div><strong>Ingresos del Seguro Social:</strong> ${{social_security_income}}</div>
+                <div><strong>Ingresos por Discapacidad:</strong> ${{disability_income}}</div>
+                <div><strong>Anualidades y Pensiones:</strong> ${{annuities_pensions}}</div>
+                <div><strong>Ingresos de Terceros:</strong> ${{third_party_income}}</div>
+            </div>
+        </div>
+
+        <!-- Co-Solicitante -->
+        <div class="section">
+            <h3>👥 CO-SOLICITANTE</h3>
+            
+            <div class="question">14. ¿Hay un Co-Solicitante?</div>
+            <div class="answer">{{co_borrower}}</div>
+        </div>
+
+        <!-- Información Legal y Financiera -->
+        <div class="section">
+            <h3>⚖️ INFORMACIÓN LEGAL Y FINANCIERA</h3>
+            
+            <div class="question">15. ¿Es usted ciudadano estadounidense?</div>
+            <div class="answer">{{us_citizen}}</div>
+
+            <div class="question">16. ¿Hay juicios pendientes en su contra?</div>
+            <div class="answer">{{outstanding_judgements}}</div>
+
+            <div class="question">17. ¿Es usted parte de una demanda activa?</div>
+            <div class="answer">{{active_lawsuit}}</div>
+
+            <div class="question">18. ¿Tiene un gravamen fiscal activo del IRS?</div>
+            <div class="answer">{{irs_tax_lien}}</div>
+
+            <div class="question">19. ¿Tiene préstamos estudiantiles diferidos?</div>
+            <div class="answer">{{deferred_student_loans}}</div>
+        </div>
+
+        <!-- Marketing -->
+        <div class="section">
+            <h3>📢 CÓMO NOS CONOCIÓ</h3>
+            
+            <div class="question">20. ¿Cómo se enteró de nosotros?</div>
+            <div class="answer">{{hear_about_us}}</div>
+        </div>
+
+        <!-- Autorizaciones -->
+        <div class="section">
+            <h3>✅ AUTORIZACIONES Y CONSENTIMIENTOS</h3>
+            
+            <div class="question">21. Verificación de Crédito:</div>
+            <div class="answer">{{credit_authorization}}</div>
+
+            <div class="question">22. Ley Patriótica:</div>
+            <div class="answer">{{patriot_act}}</div>
+
+            <div class="question">23. Divulgación Electrónica:</div>
+            <div class="answer">{{electronic_disclosure}}</div>
+
+            <div class="question">24. Reconocimiento Final:</div>
+            <div class="answer">{{final_acknowledgement}}</div>
+        </div>
+
+        <!-- Firma -->
+        <div class="section">
+            <h3>✍️ FIRMA DEL SOLICITANTE</h3>
+            <div class="question">Firma Digital:</div>
+            <div class="answer">
+                {{#signature}}
+                <img src="{{signature}}" alt="Firma del Solicitante" class="signature">
+                {{/signature}}
+                {{^signature}}
+                No se proporcionó firma digital.
+                {{/signature}}
+            </div>
+        </div>
+
+        <!-- Resumen de Datos -->
+        <div class="section">
+            <h3>📄 DATOS COMPLETOS EN FORMATO JSON</h3>
+            <div class="answer">
+                <pre>{{form_data}}</pre>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div style="margin-top: 50px; padding: 20px; background: #f8f9fa; text-align: center; font-size: 12px; color: #666;">
+            <p><strong>Ready To Mortgage - Sonia Crespo</strong></p>
+            <p>Esta aplicación fue enviada a través del formulario web el {{submission_date}}</p>
+            <p>Contacte al solicitante dentro de 24 horas para continuar con el proceso.</p>
+        </div>
+    </div>
+</body>
+</html>
