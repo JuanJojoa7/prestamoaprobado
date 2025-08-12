@@ -1,0 +1,1826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ready To Mortgage - Pre-Approval Application</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        /* Pre-Approval Form Specific Styles */
+        .pre-approval-container {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #1E4E8C 0%, #2563EB 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .security-badge {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            z-index: 10;
+        }
+
+        .security-badge img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: #FFD700;
+            padding: 10px;
+        }
+
+        .form-wizard {
+            display: flex;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .form-slide {
+            display: none;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+            color: white;
+        }
+
+        .form-slide.active {
+            display: block;
+            animation: slideIn 0.5s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .form-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .form-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .question-counter {
+            font-size: 1rem;
+            margin-bottom: 3rem;
+            opacity: 0.8;
+        }
+
+        .form-content {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            color: #333;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .required {
+            color: #dc3545;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #1E4E8C;
+            box-shadow: 0 0 0 3px rgba(30, 78, 140, 0.1);
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 1rem;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 1rem center;
+            background-repeat: no-repeat;
+            background-size: 1rem;
+            padding-right: 3rem;
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: #1E4E8C;
+            box-shadow: 0 0 0 3px rgba(30, 78, 140, 0.1);
+        }
+
+        .helper-text {
+            font-size: 0.9rem;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+
+        .error-message {
+            background: #dc3545;
+            color: white;
+            padding: 0.75rem 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Address Grid Styles */
+        .address-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .address-grid .form-input:first-child {
+            grid-column: 1 / -1;
+        }
+
+        .address-grid-full {
+            grid-column: 1 / -1;
+        }
+
+        /* Yes/No Button Styles */
+        .yes-no-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .btn-choice {
+            padding: 1rem 3rem;
+            border: 3px solid #FFFFFF;
+            border-radius: 12px;
+            background: #FFFFFF;
+            color: #1E4E8C;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 140px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .btn-choice:hover {
+            background: #F8F9FA;
+            border-color: #1E4E8C;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+        }
+
+        .btn-choice.selected {
+            background: #1E4E8C;
+            border-color: #1E4E8C;
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(30,78,140,0.4);
+        }
+
+        /* Remove the specific red styling for 'no' buttons */
+
+        /* Retirement Income Grid Styles */
+        .retirement-income-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .income-field {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .income-field .form-input {
+            padding: 1rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            background: white;
+            color: #1E4E8C;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .income-field .form-input:focus {
+            border-color: #1E4E8C;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(30,78,140,0.1);
+        }
+
+        .field-label {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #6b7280;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        /* Select Dropdown Styles */
+        .select-container {
+            position: relative;
+            margin: 2rem 0;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 1rem 3rem 1rem 1rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            background: white;
+            color: #1E4E8C;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 1rem center;
+            background-repeat: no-repeat;
+            background-size: 1rem;
+        }
+
+        .form-select:focus {
+            border-color: #1E4E8C;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(30,78,140,0.1);
+        }
+
+        .select-helper {
+            position: absolute;
+            top: -0.5rem;
+            left: 1rem;
+            background: white;
+            padding: 0 0.5rem;
+            font-size: 0.85rem;
+            color: #6b7280;
+            font-weight: 500;
+            pointer-events: none;
+        }
+
+        /* Credit Check Styles */
+        .credit-check-notice {
+            background: #f3f4f6;
+            border: 2px solid #d1d5db;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .credit-check-notice p {
+            margin: 0;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .credit-authorization-container {
+            margin: 2rem 0;
+            width: 100%;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: flex-start;
+            margin: 1rem 0;
+            width: 100%;
+            gap: 1rem;
+        }
+
+        .radio-option input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            margin: 0;
+            margin-top: 0.5rem;
+            flex-shrink: 0;
+            accent-color: #1E4E8C;
+            cursor: pointer;
+        }
+
+        .radio-label {
+            flex: 1;
+            cursor: pointer;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #374151;
+            padding: 1rem;
+            background: #e5f3ff;
+            border: 2px solid #bfdbfe;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .radio-button {
+            display: none;
+        }
+
+        .radio-text {
+            display: block;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        /* Checkbox Styles */
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .checkbox-item:hover {
+            border-color: #1E4E8C;
+            background: #f8f9fa;
+        }
+
+        .checkbox-item.selected {
+            border-color: #1E4E8C;
+            background: #e3f2fd;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            margin-right: 0.75rem;
+            width: 18px;
+            height: 18px;
+            accent-color: #1E4E8C;
+        }
+
+        .checkbox-item label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .checkbox-single {
+            grid-column: 1 / -1;
+        }
+
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+        }
+
+        .btn-nav {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .btn-primary {
+            background: #1E4E8C;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563EB;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 78, 140, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        .progress-bar {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 10;
+        }
+
+        .progress-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .progress-dot.active {
+            background: #FFD700;
+            transform: scale(1.2);
+        }
+
+        .progress-dot.completed {
+            background: #28a745;
+        }
+
+        .progress-counter {
+            position: fixed;
+            bottom: 6rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-size: 1rem;
+            z-index: 10;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .form-content {
+                padding: 2rem 1.5rem;
+                margin: 1rem 0;
+            }
+
+            .form-title {
+                font-size: 2rem;
+            }
+
+            .security-badge {
+                top: 1rem;
+                left: 1rem;
+            }
+
+            .security-badge img {
+                width: 60px;
+                height: 60px;
+            }
+
+            .radio-label {
+                font-size: 0.85rem;
+                padding: 1rem;
+            }
+
+            .radio-option input[type="radio"] {
+                width: 18px;
+                height: 18px;
+            }
+        }
+
+        /* Start Screen Specific */
+        .start-screen {
+            text-align: center;
+        }
+
+        .start-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .start-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .start-description {
+            font-size: 1rem;
+            margin-bottom: 3rem;
+            opacity: 0.8;
+        }
+
+        .btn-start {
+            padding: 1.2rem 3rem;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-start:hover {
+            background: rgba(255,255,255,0.3);
+            border-color: rgba(255,255,255,0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .btn-start svg {
+            margin-left: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-start:hover svg {
+            transform: translateX(5px);
+        }
+    </style>
+</head>
+<body>
+    <div class="pre-approval-container">
+        <!-- Security Badge -->
+        <div class="security-badge">
+            <img src="assets/img/CRP.png" alt="SSL Security Guarantee">
+        </div>
+
+        <!-- Form Wizard -->
+        <div class="form-wizard">
+            <!-- Start Screen -->
+            <div class="form-slide active" id="slide-start">
+                <div class="start-screen">
+                    <h1 class="start-title">2025 ONLINE 1003 APPLICATION - SONIA</h1>
+                    <p class="start-subtitle">Link in English to the right</p>
+                    <p class="start-description">24 Questions</p>
+                    
+                    <button type="button" class="btn-start" onclick="startForm()">
+                        START
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question 1: Borrower Name -->
+            <div class="form-slide" id="slide-1">
+                <div class="form-content">
+                    <div class="form-group">
+                        <label for="borrowerName">Borrower Name <span class="required">*</span></label>
+                        <input type="text" id="borrowerName" name="borrowerName" class="form-input" required>
+                    </div>
+                </div>
+                
+                <div class="error-message" id="error-1">
+                    There are incomplete required fields. Please complete them.
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn-nav btn-secondary" onclick="previousSlide()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        PREVIOUS
+                    </button>
+                    <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
+                        NEXT
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question 2: Contact Information -->
+            <div class="form-slide" id="slide-2">
+                <div class="form-content">
+                    <div class="form-group">
+                        <label for="contactInfo">Borrower Contact Information <span class="required">*</span></label>
+                        <input type="tel" id="mobilePhone" name="mobilePhone" class="form-input" placeholder="Mobile Phone" required style="margin-bottom: 1rem;">
+                        <input type="email" id="emailAddress" name="emailAddress" class="form-input" placeholder="Email Address" required>
+                    </div>
+                </div>
+                
+                <div class="error-message" id="error-2">
+                    There are incomplete required fields. Please complete them.
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn-nav btn-secondary" onclick="previousSlide()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        PREVIOUS
+                    </button>
+                    <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
+                        NEXT
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question 3: Borrower Loan Information -->
+            <div class="form-slide" id="slide-3">
+                <div class="form-content">
+                    <div class="form-group">
+                        <label for="loanInfo">Borrower Loan Information <span class="required">*</span></label>
+                        
+                        <div style="margin-bottom: 1rem;">
+                            <div class="helper-text">Who is applying for this loan?</div>
+                            <select id="whoApplying" name="whoApplying" class="form-select" required>
+                                <option value="">Select</option>
+                                <option value="individually">Applying individually</option>
+                                <option value="spouse">Applying jointly with spouse</option>
+                                <option value="another">Applying jointly with another person</option>
+                                <option value="multiple">More than 2 people applying for this loan</option>
+                            </select>
+                        </div>
+
+                        <div style="margin-bottom: 1rem;">
+                            <div class="helper-text">Property Description</div>
+                            <select id="propertyDescription" name="propertyDescription" class="form-select" required>
+                                <option value="">Select</option>
+                                <option value="single-family">Single family</option>
+                                <option value="multi-family">Multi-family</option>
+                                <option value="condominium">Condominium</option>
+                                <option value="mixed">Mixed property</option>
+                                <option value="commercial">Commercial Property</option>
+                                <option value="mobile">Mobile/Manufactured</option>
+                            </select>
+                        </div>
+
+                        <div style="margin-bottom: 1rem;">
+                            <div class="helper-text">Purpose of the Loan</div>
+                            <select id="loanPurpose" name="loanPurpose" class="form-select" required>
+                                <option value="">Select</option>
+                                <option value="purchase">Purchase - I'm purchasing a property and I have an accepted contract with a seller.</option>
+                                <option value="pre-qualification">Pre-qualification - I'm shopping for a property and I don't have an accepted contract with a seller.</option>
+                                <option value="refinance-balance">Refinance Existing Balance - I'd like to refinance the existing mortgage balance on my property.</option>
+                                <option value="refinance-cash">Refinance to Obtain Cash - I'd like to refinance my property and obtain cash at closing.</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <div class="helper-text">Requested Loan Amount</div>
+                            <select id="loanAmount" name="loanAmount" class="form-select" required>
+                                <option value="">Select</option>
+                                <option value="100000">100,000</option>
+                                <option value="110000">110,000</option>
+                                <option value="120000">120,000</option>
+                                <option value="135000">135,000</option>
+                                <option value="145000">145,000</option>
+                                <option value="150000">150,000</option>
+                                <option value="160000">160,000</option>
+                                <option value="175000">175,000</option>
+                                <option value="200000">200,000</option>
+                                <option value="225000">225,000</option>
+                                <option value="250000">250,000</option>
+                                <option value="275000">275,000</option>
+                                <option value="300000">300,000</option>
+                                <option value="375000">375,000</option>
+                                <option value="400000">400,000</option>
+                                <option value="475000">475,000</option>
+                                <option value="500000">500,000</option>
+                                <option value="525000">525,000</option>
+                                <option value="600000">600,000</option>
+                                <option value="650000">650,000</option>
+                                <option value="700000">700,000</option>
+                                <option value="750000">750,000</option>
+                                <option value="800000">800,000</option>
+                                <option value="850000">850,000</option>
+                                <option value="900000">900,000</option>
+                                <option value="1000000">1,000,000</option>
+                                <option value="1500000">1,500,000</option>
+                                <option value="2000000">2,000,000</option>
+                                <option value="2500000">2,500,000</option>
+                                <option value="3000000">3,000,000</option>
+                                <option value="above3mil">ABOVE 3 MIL</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="error-message" id="error-3">
+                    There are incomplete required fields. Please complete them.
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn-nav btn-secondary" onclick="previousSlide()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        PREVIOUS
+                    </button>
+                    <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
+                        NEXT
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question 4: Primary Borrower Date of Birth -->
+            <div class="form-slide" id="slide-4">
+                <div class="form-content">
+                    <div class="form-group">
+                        <label for="dateOfBirth">Primary Borrower Date of Birth <span class="required">*</span></label>
+                        <input type="date" id="dateOfBirth" name="dateOfBirth" class="form-input" required>
+                    </div>
+                </div>
+                
+                <div class="error-message" id="error-4">
+                    There are incomplete required fields. Please complete them.
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn-nav btn-secondary" onclick="previousSlide()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        PREVIOUS
+                    </button>
+                    <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
+                        NEXT
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question 5: Primary Borrower Social Security # -->
+            <div class="form-slide" id="slide-5">
+                <div class="form-content">
+                    <div class="form-group">
+                        <label for="socialSecurity">Primary Borrower Social Security #</label>
+                        <div class="helper-text">ITIN Borrower: Replace SS# with ITIN Tax ID Number</div>
+                        <input type="text" id="socialSecurity" name="socialSecurity" class="form-input" placeholder="XXX-XX-XXXX">
+                    </div>
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn-nav btn-secondary" onclick="previousSlide()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        PREVIOUS
+                    </button>
+                    <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
+                        NEXT
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question 6: Marital Status -->
+            <div class="form-slide" id="slide-6">
+                <div class="form-content">
+                    <div class="form-group">
+                        <label for="maritalStatus">Marital Status <span class="required">*</span></label>
+                        <select id="maritalStatus" name="maritalStatus" class="form-select" required>
+                            <option value="">Please Select</option>
+                            <option value="single">Single</option>
+                            <option value="married">Married</option>
+                            <option value="divorced">Divorced</option>
+                            <option value="divorced-alimony">Divorced w/ Alimony</option>
+                            <option value="divorced-alimony-child">Divorced w/ Alimony & Child Support</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="error-message" id="error-6">
+                    There are incomplete required fields. Please complete them.
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn-nav btn-secondary" onclick="previousSlide()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        PREVIOUS
+                    </button>
+                    <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
+                        NEXT
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question 7: Dependents -->
+            <div class="form-slide" id="slide-7">
+                <div class="form-content">
+                    <div class="form-group">
+                        <label for="dependents">Dependents (optional)</label>
+                        <select id="dependents" name="dependents" class="form-select">
+                            <option value="">Please Select</option>
+                            <option value="children">Children</option>
+                            <option value="non-custodial">Non-Custodial</option>
+                            <option value="parents">Parents</option>
+                            <option value="direct-family">Direct Family Relatives</option>
+                            <option value="distant-relatives">Distant Relatives</option>
+                            <option value="none">None of the above</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn-nav btn-secondary" onclick="previousSlide()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        PREVIOUS
+                    </button>
+                    <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
+                        NEXT
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question 8: Your Current Property Address -->
+            <div class="form-slide" id="slide-8">
+                <div class="form-content">
+                    <div class="form-group">
+                        <label for="currentAddress">Your Current Property Address <span class="required">*</span></label>
+                        
+                        <div class="address-grid">
+                            <input type="text" id="streetAddress" name="streetAddress" class="form-input" placeholder="Street Address" required>
+                            <input type="text" id="streetAddress2" name="streetAddress2" class="form-input" placeholder="Street Address Line 2">
+                            <input type="text" id="city" name="city" class="form-input" placeholder="City" required>
+                            <input type="text" id="stateProvince" name="stateProvince" class="form-input" placeholder="State / Province" required>
+                            <input type="text" id="postalCode" name="postalCode" class="form-input" placeholder="Postal / Zip Code" required>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="error-message" id="error-8">
+                    There are incomplete required fields. Please complete them.
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn-nav btn-secondary" onclick="previousSlide()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        PREVIOUS
+                    </button>
+                    <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
+                        NEXT
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question 9: Have you lived at that address for more than two years? -->
+            <div class="form-slide" id="slide-9">
+                <div class="form-content">
+                    <div class="form-group">
+                        <label>Have you lived at that address for more than two years? <span class="required">*</span></label>
+                        
+                        <div class="yes-no-buttons">
+                            <button type="button" class="btn-choice" data-value="yes" onclick="selectYesNo(this, 'livedTwoYears')">YES</button>
+                            <button type="button" class="btn-choice no" data-value="no" onclick="selectYesNo(this, 'livedTwoYears')">NO</button>
+                        </div>
+                        <input type="hidden" id="livedTwoYears" name="livedTwoYears" required>
+                    </div>
+                </div>
+                
+                <div class="error-message" id="error-9">
+                    There are incomplete required fields. Please complete them.
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn-nav btn-secondary" onclick="previousSlide()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        PREVIOUS
+                    </button>
+                    <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
+                        NEXT
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question 10: Borrower Mortgage Event History -->
+            <div class="form-slide" id="slide-10">
+                <div class="form-content">
+                    <div class="form-group">
+                        <label>Borrower Mortgage Event History <span class="required">*</span></label>
+                        <div class="helper-text">Within the last 7 years</div>
+                        
+                        <div class="checkbox-group">
+                            <div class="checkbox-item" onclick="toggleCheckbox(this, 'bankruptcy')">
+                                <input type="checkbox" id="bankruptcy" name="mortgageHistory" value="bankruptcy">
+                                <label for="bankruptcy">Bankruptcy</label>
+                            </div>
+                            <div class="checkbox-item" onclick="toggleCheckbox(this, 'foreclosure')">
+                                <input type="checkbox" id="foreclosure" name="mortgageHistory" value="foreclosure">
+                                <label for="foreclosure">Foreclosure</label>
+                            </div>
+                            <div class="checkbox-item" onclick="toggleCheckbox(this, 'shortSale')">
+                                <input type="checkbox" id="shortSale" name="mortgageHistory" value="shortSale">
+                                <label for="shortSale">Short Sale</label>
+                            </div>
+                            <div class="checkbox-item selected" onclick="toggleCheckbox(this, 'deedInLieu')">
+                                <input type="checkbox" id="deedInLieu" name="mortgageHistory" value="deedInLieu" checked>
+                                <label for="deedInLieu">Deed in Lieu</label>
+                            </div>
+                            <div class="checkbox-item checkbox-single" onclick="toggleCheckbox(this, 'noneAbove')">
+                                <input type="checkbox" id="noneAbove" name="mortgageHistory" value="noneAbove">
+                                <label for="noneAbove">NONE OF THE ABOVE</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn-nav btn-secondary" onclick="previousSlide()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        PREVIOUS
+                    </button>
+                    <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
+                        NEXT
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question 11: Is the Primary Borrower Retired? -->
+            <div class="form-slide" id="slide-11">
+                <div class="form-content">
+                    <div class="form-group">
+                        <label>Is the Primary Borrower Retired?</label>
+                        
+                        <div class="yes-no-buttons">
+                            <button type="button" class="btn-choice" data-value="yes" onclick="selectYesNo(this, 'isRetired')">YES</button>
+                            <button type="button" class="btn-choice no" data-value="no" onclick="selectYesNo(this, 'isRetired')">NO</button>
+                        </div>
+                        <input type="hidden" id="isRetired" name="isRetired">
+                    </div>
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn-nav btn-secondary" onclick="previousSlide()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        PREVIOUS
+                    </button>
+                    <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
+                        NEXT
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question 12: Borrower primary source of income? -->
+            <div class="form-slide" id="slide-12">
+                <div class="form-content">
+                    <div class="form-group">
+                        <label>Borrower primary source of income? <span class="required">*</span></label>
+                        
+                        <div class="yes-no-buttons">
+                            <button type="button" class="btn-choice" data-value="w2" onclick="selectYesNo(this, 'incomeSource')">W-2 Wage Earner</button>
+                            <button type="button" class="btn-choice" data-value="self-employed" onclick="selectYesNo(this, 'incomeSource')">Self-Employed</button>
+                        </div>
+                        <input type="hidden" id="incomeSource" name="incomeSource" value="" required>
+                    </div>
+                </div>
+                
+                <div class="error-message" id="error-12">
+                    There are incomplete required fields. Please complete them.
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn-nav btn-secondary" onclick="previousSlide()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        PREVIOUS
+                    </button>
+                    <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
+                        NEXT
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question 13: List Retirement Income for Primary Borrower -->
+            <div class="form-slide" id="slide-13">
+                <div class="form-content">
+                    <div class="form-group">
+                        <label>List Retirement Income for Primary Borrower</label>
+                        
+                        <div class="retirement-income-grid">
+                            <div class="income-field">
+                                <input type="number" id="socialSecurityIncome" name="socialSecurityIncome" class="form-input" placeholder="0">
+                                <label for="socialSecurityIncome" class="field-label">Social Security Income</label>
+                            </div>
+                            
+                            <div class="income-field">
+                                <input type="number" id="disabilityIncome" name="disabilityIncome" class="form-input" placeholder="0">
+                                <label for="disabilityIncome" class="field-label">Disability Income</label>
+                            </div>
+                            
+                            <div class="income-field">
+                                <input type="number" id="annuitiesPensions" name="annuitiesPensions" class="form-input" placeholder="0">
+                                <label for="annuitiesPensions" class="field-label">Annuities & Pensions</label>
+                            </div>
+                            
+                            <div class="income-field">
+                                <input type="number" id="thirdPartyIncome" name="thirdPartyIncome" class="form-input" placeholder="0">
+                                <label for="thirdPartyIncome" class="field-label">Third Party Income</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="error-message" id="error-13">
+                    There are incomplete required fields. Please complete them.
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn-nav btn-secondary" onclick="previousSlide()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        PREVIOUS
+                    </button>
+                    <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
+                        NEXT
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question 14: Is there a Co-Borrower? -->
+            <div class="form-slide" id="slide-14">
+                <div class="form-content">
+                    <div class="form-group">
+                        <label>Is there a Co-Borrower? <span class="required">*</span></label>
+                        
+                        <div class="yes-no-buttons">
+                            <button type="button" class="btn-choice" data-value="yes" onclick="selectYesNo(this, 'coBorrower')">YES</button>
+                            <button type="button" class="btn-choice" data-value="no" onclick="selectYesNo(this, 'coBorrower')">NO</button>
+                        </div>
+                        <input type="hidden" id="coBorrower" name="coBorrower" value="" required>
+                    </div>
+                </div>
+                
+                <div class="error-message" id="error-14">
+                    There are incomplete required fields. Please complete them.
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn-nav btn-secondary" onclick="previousSlide()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        PREVIOUS
+                    </button>
+                    <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
+                        NEXT
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question 15: Are you a US Citizen? -->
+            <div class="form-slide" id="slide-15">
+                <div class="form-content">
+                    <div class="form-group">
+                        <label>Are you a US Citizen? <span class="required">*</span></label>
+                        
+                        <div class="yes-no-buttons">
+                            <button type="button" class="btn-choice" data-value="yes" onclick="selectYesNo(this, 'usCitizen')">YES</button>
+                            <button type="button" class="btn-choice" data-value="no" onclick="selectYesNo(this, 'usCitizen')">NO</button>
+                        </div>
+                        <input type="hidden" id="usCitizen" name="usCitizen" value="" required>
+                    </div>
+                </div>
+                
+                <div class="error-message" id="error-15">
+                    There are incomplete required fields. Please complete them.
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn-nav btn-secondary" onclick="previousSlide()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        PREVIOUS
+                    </button>
+                    <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
+                        NEXT
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question 16: Are there any outstanding judgements against you? -->
+            <div class="form-slide" id="slide-16">
+                <div class="form-content">
+                    <div class="form-group">
+                        <label>Are there any outstanding judgements against you? <span class="required">*</span></label>
+                        
+                        <div class="yes-no-buttons">
+                            <button type="button" class="btn-choice" data-value="no" onclick="selectYesNo(this, 'outstandingJudgements')">NO</button>
+                            <button type="button" class="btn-choice" data-value="yes" onclick="selectYesNo(this, 'outstandingJudgements')">YES</button>
+                        </div>
+                        <input type="hidden" id="outstandingJudgements" name="outstandingJudgements" value="" required>
+                    </div>
+                </div>
+                
+                <div class="error-message" id="error-16">
+                    There are incomplete required fields. Please complete them.
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn-nav btn-secondary" onclick="previousSlide()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        PREVIOUS
+                    </button>
+                    <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
+                        NEXT
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question 17: Are you a party to an active lawsuit? -->
+            <div class="form-slide" id="slide-17">
+                <div class="form-content">
+                    <div class="form-group">
+                        <label>Are you a party to an active lawsuit? <span class="required">*</span></label>
+                        
+                        <div class="yes-no-buttons">
+                            <button type="button" class="btn-choice" data-value="no" onclick="selectYesNo(this, 'activeLawsuit')">NO</button>
+                            <button type="button" class="btn-choice" data-value="yes" onclick="selectYesNo(this, 'activeLawsuit')">YES</button>
+                        </div>
+                        <input type="hidden" id="activeLawsuit" name="activeLawsuit" value="" required>
+                    </div>
+                </div>
+                
+                <div class="error-message" id="error-17">
+                    There are incomplete required fields. Please complete them.
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn-nav btn-secondary" onclick="previousSlide()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        PREVIOUS
+                    </button>
+                    <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
+                        NEXT
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question 18: Do you have an active IRS tax Lien? -->
+            <div class="form-slide" id="slide-18">
+                <div class="form-content">
+                    <div class="form-group">
+                        <label>Do you have an active IRS tax Lien? <span class="required">*</span></label>
+                        
+                        <div class="yes-no-buttons">
+                            <button type="button" class="btn-choice" data-value="no" onclick="selectYesNo(this, 'irsTaxLien')">NO</button>
+                            <button type="button" class="btn-choice" data-value="yes" onclick="selectYesNo(this, 'irsTaxLien')">YES</button>
+                        </div>
+                        <input type="hidden" id="irsTaxLien" name="irsTaxLien" value="" required>
+                    </div>
+                </div>
+                
+                <div class="error-message" id="error-18">
+                    There are incomplete required fields. Please complete them.
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn-nav btn-secondary" onclick="previousSlide()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        PREVIOUS
+                    </button>
+                    <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
+                        NEXT
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question 19: Do you have any deferred Student Loans? -->
+            <div class="form-slide" id="slide-19">
+                <div class="form-content">
+                    <div class="form-group">
+                        <label>Do you have any deferred Student Loans? <span class="required">*</span></label>
+                        
+                        <div class="yes-no-buttons">
+                            <button type="button" class="btn-choice" data-value="no" onclick="selectYesNo(this, 'deferredStudentLoans')">NO</button>
+                            <button type="button" class="btn-choice" data-value="yes" onclick="selectYesNo(this, 'deferredStudentLoans')">YES</button>
+                        </div>
+                        <input type="hidden" id="deferredStudentLoans" name="deferredStudentLoans" value="" required>
+                    </div>
+                </div>
+                
+                <div class="error-message" id="error-19">
+                    There are incomplete required fields. Please complete them.
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn-nav btn-secondary" onclick="previousSlide()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        PREVIOUS
+                    </button>
+                    <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
+                        NEXT
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question 20: How did you hear about us? -->
+            <div class="form-slide" id="slide-20">
+                <div class="form-content">
+                    <div class="form-group">
+                        <label for="hearAboutUs">How did you hear about us? <span class="required">*</span></label>
+                        
+                        <div class="select-container">
+                            <select id="hearAboutUs" name="hearAboutUs" class="form-select" required>
+                                <option value="">Select</option>
+                                <option value="google-review">Google Review</option>
+                                <option value="website">Our Website</option>
+                                <option value="online-ad">Online Ad</option>
+                                <option value="email-flyer">Email Flyer</option>
+                                <option value="zillow">Zillow</option>
+                                <option value="better-business-bureau">Better Business Bureau</option>
+                                <option value="marketing-brochure">Marketing Brochure</option>
+                                <option value="realtor-referral">Realtor Referral</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="error-message" id="error-20">
+                    There are incomplete required fields. Please complete them.
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn-nav btn-secondary" onclick="previousSlide()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        PREVIOUS
+                    </button>
+                    <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
+                        NEXT
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question 21: Credit Check -->
+            <div class="form-slide" id="slide-21">
+                <div class="form-content">
+                    <div class="form-group">
+                        <label>Credit Check <span class="required">*</span></label>
+                        
+                        <div class="credit-check-notice">
+                            <p>WE DO NOT AUTOMATICALLY PULL YOUR CREDIT BY CHECKING THIS BOX! WE FIRST REVIEW YOUR FINANCIALS AND CALL YOU TO OBTAIN YOUR VERBAL AUTHORIZATION</p>
+                        </div>
+                        
+                        <div class="credit-authorization-container">
+                            <div class="radio-option">
+                                <input type="radio" id="creditAuthorization" name="creditAuthorization" value="authorized" required>
+                                <label for="creditAuthorization" class="radio-label">
+                                    <span class="radio-text">The Borrower and Co-Borrower (if any) hereby grant permission to Ready To Mortgage, to obtain all information deemed necessary to process your mortgage loan application. This information includes, but is not limited to, your past and present employment status, your deposit accounts, your past and present consumer credit record, your mortgage record and/or your rental record. Ready To Mortgage agrees to obtain your verbal permission and consent before pulling your credit when required.</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="error-message" id="error-21">
+                    There are incomplete required fields. Please complete them.
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn-nav btn-secondary" onclick="previousSlide()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        PREVIOUS
+                    </button>
+                    <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
+                        NEXT
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question 22: Patriot Act -->
+            <div class="form-slide" id="slide-22">
+                <div class="form-content">
+                    <div class="form-group">
+                        <label>Patriot Act <span class="required">*</span></label>
+                        
+                        <div class="credit-authorization-container">
+                            <div class="radio-option">
+                                <input type="radio" id="patriotAct" name="patriotAct" value="acknowledged" required>
+                                <label for="patriotAct" class="radio-label">
+                                    <span class="radio-text">The Borrower and Co-Borrower (if any) hereby acknowledge and agree that to help the government fight the funding of terrorism and money laundering activities, Federal law requires all financial institutions to obtain, verify, and record information that identifies each person who opens an account. What this means for you: As part of applying for your mortgage loan, we will ask for your name, address, date of birth, and other information that will allow us to identify you. We may also ask to see your driver's license or other identifying documents.</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="error-message" id="error-22">
+                    There are incomplete required fields. Please complete them.
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn-nav btn-secondary" onclick="previousSlide()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        PREVIOUS
+                    </button>
+                    <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
+                        NEXT
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question 23: Electronic Disclosure -->
+            <div class="form-slide" id="slide-23">
+                <div class="form-content">
+                    <div class="form-group">
+                        <label>Electronic Disclosure <span class="required">*</span></label>
+                        
+                        <div class="credit-authorization-container">
+                            <div class="radio-option">
+                                <input type="radio" id="electronicDisclosure" name="electronicDisclosure" value="acknowledged" required>
+                                <label for="electronicDisclosure" class="radio-label">
+                                    <span class="radio-text">The Borrower and Co-Borrower (if any) hereby acknowledge and agree that by applying for a loan on-line, you agree to accept all applicable disclosures associated with this transaction in an electronic form, including disclosures required by the Truth in Lending Act, Real Estate Settlement Procedures Act and Equal Credit Opportunity Act. Paper copies will be provided for certain real estate related contracts and transactions after your loan application is received including but not limited to copies of any Mortgage events such as foreclosures, short sales and bankruptcies that would affect your ability to obtain a loan.</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="error-message" id="error-23">
+                    There are incomplete required fields. Please complete them.
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn-nav btn-secondary" onclick="previousSlide()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        PREVIOUS
+                    </button>
+                    <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
+                        NEXT
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Question 24: Acknowledgement -->
+            <div class="form-slide" id="slide-24">
+                <div class="form-content">
+                    <div class="form-group">
+                        <label>Acknowledgement <span class="required">*</span></label>
+                        
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="finalAcknowledgement" name="finalAcknowledgement" value="acknowledged" required>
+                            <label for="finalAcknowledgement">By checking the box above and submitting form. I/we agree to the terms and conditions set forth below</label>
+                        </div>
+                        
+                        <div style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 8px; font-size: 0.9rem; color: #6b7280;">
+                            <strong>TERMS AND CONDITIONS:</strong> By checking the box above and submitting this form. I/we consent and agree that all of my information posted on this application form is true, correct and is being provided to Ready To Mortgage for a loan pre-qualification. I/We further acknowledge and agree that I/we have read and the terms and conditions provided in the Credit Check, Patriot Act and Electronic Disclosure sections.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="error-message" id="error-24">
+                    There are incomplete required fields. Please complete them.
+                </div>
+                
+                <div class="form-navigation">
+                    <button type="button" class="btn-nav btn-secondary" onclick="previousSlide()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        PREVIOUS
+                    </button>
+                    <button type="button" class="btn-nav btn-primary" onclick="submitForm()">
+                        SUBMIT APPLICATION
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="progress-bar">
+                <div class="progress-dot completed" data-slide="start"></div>
+                <div class="progress-dot active" data-slide="1"></div>
+                <div class="progress-dot" data-slide="2"></div>
+                <div class="progress-dot" data-slide="3"></div>
+                <div class="progress-dot" data-slide="4"></div>
+                <div class="progress-dot" data-slide="5"></div>
+                <div class="progress-dot" data-slide="6"></div>
+                <div class="progress-dot" data-slide="7"></div>
+                <div class="progress-dot" data-slide="8"></div>
+                <div class="progress-dot" data-slide="9"></div>
+                <div class="progress-dot" data-slide="10"></div>
+                <div class="progress-dot" data-slide="11"></div>
+                <div class="progress-dot" data-slide="12"></div>
+                <div class="progress-dot" data-slide="13"></div>
+                <div class="progress-dot" data-slide="14"></div>
+                <div class="progress-dot" data-slide="15"></div>
+                <div class="progress-dot" data-slide="16"></div>
+                <div class="progress-dot" data-slide="17"></div>
+                <div class="progress-dot" data-slide="18"></div>
+                <div class="progress-dot" data-slide="19"></div>
+                <div class="progress-dot" data-slide="20"></div>
+                <div class="progress-dot" data-slide="21"></div>
+                <div class="progress-dot" data-slide="22"></div>
+                <div class="progress-dot" data-slide="23"></div>
+                <div class="progress-dot" data-slide="24"></div>
+            </div>
+
+            <!-- Progress Counter -->
+            <div class="progress-counter">
+                <span id="currentSlide">1</span> of <span id="totalSlides">24</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- EmailJS -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    
+    <script>
+        // Initialize EmailJS
+        (function(){
+            emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
+        })();
+
+        let currentSlideIndex = 0;
+        const totalSlides = 24;
+        const formData = {};
+
+        // Form Navigation Functions
+
+        function selectYesNo(button, inputName) {
+            // Remove selected class from all buttons in the same group
+            const parentButtons = button.parentElement.querySelectorAll('.btn-choice');
+            parentButtons.forEach(btn => btn.classList.remove('selected'));
+            
+            // Add selected class to clicked button
+            button.classList.add('selected');
+            
+            // Set the hidden input value
+            document.getElementById(inputName).value = button.dataset.value;
+        }
+
+        function toggleCheckbox(checkboxItem, checkboxId) {
+            const checkbox = document.getElementById(checkboxId);
+            const noneCheckbox = document.getElementById('noneAbove');
+            
+            // If clicking "NONE OF THE ABOVE"
+            if (checkboxId === 'noneAbove') {
+                if (!checkbox.checked) {
+                    // Uncheck all other checkboxes
+                    document.querySelectorAll('input[name="mortgageHistory"]:not(#noneAbove)').forEach(cb => {
+                        cb.checked = false;
+                        cb.closest('.checkbox-item').classList.remove('selected');
+                    });
+                }
+            } else {
+                // If clicking any other option, uncheck "NONE OF THE ABOVE"
+                if (noneCheckbox && noneCheckbox.checked) {
+                    noneCheckbox.checked = false;
+                    noneCheckbox.closest('.checkbox-item').classList.remove('selected');
+                }
+            }
+            
+            // Toggle the clicked checkbox
+            checkbox.checked = !checkbox.checked;
+            checkboxItem.classList.toggle('selected', checkbox.checked);
+        }
+
+        function startForm() {
+            showSlide(1);
+        }
+
+        function showSlide(slideNumber) {
+            // Hide all slides
+            const slides = document.querySelectorAll('.form-slide');
+            slides.forEach(slide => slide.classList.remove('active'));
+
+            // Show current slide
+            const currentSlide = document.getElementById(`slide-${slideNumber === 0 ? 'start' : slideNumber}`);
+            if (currentSlide) {
+                currentSlide.classList.add('active');
+            }
+
+            // Update progress
+            updateProgress(slideNumber);
+            updateCounter(slideNumber);
+            
+            currentSlideIndex = slideNumber;
+        }
+
+        function nextSlide() {
+            // Validate current slide
+            if (!validateCurrentSlide()) {
+                return;
+            }
+
+            // Save current slide data
+            saveCurrentSlideData();
+
+            // Move to next slide
+            if (currentSlideIndex < totalSlides) {
+                showSlide(currentSlideIndex + 1);
+            } else {
+                // Submit form
+                submitForm();
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlideIndex > 1) {
+                showSlide(currentSlideIndex - 1);
+            } else {
+                showSlide(0); // Back to start
+            }
+        }
+
+        function validateCurrentSlide() {
+            const currentSlide = document.getElementById(`slide-${currentSlideIndex}`);
+            if (!currentSlide) return true;
+
+            const requiredInputs = currentSlide.querySelectorAll('input[required], select[required]');
+            const errorMessage = document.getElementById(`error-${currentSlideIndex}`);
+            let isValid = true;
+
+            // Hide error message first
+            if (errorMessage) {
+                errorMessage.classList.remove('show');
+            }
+
+            requiredInputs.forEach(input => {
+                if (input.type === 'hidden') {
+                    // For hidden inputs (yes/no buttons), check if they have a value
+                    if (!input.value) {
+                        isValid = false;
+                    }
+                } else if (!input.value.trim()) {
+                    input.style.borderColor = '#dc3545';
+                    isValid = false;
+                } else {
+                    input.style.borderColor = '#e1e5e9';
+                }
+            });
+
+            // Special validation for checkbox groups
+            if (currentSlideIndex === 10) {
+                const checkboxes = currentSlide.querySelectorAll('input[name="mortgageHistory"]');
+                const hasSelection = Array.from(checkboxes).some(cb => cb.checked);
+                if (!hasSelection) {
+                    isValid = false;
+                }
+            }
+
+            if (!isValid && errorMessage) {
+                // Show error message
+                setTimeout(() => {
+                    errorMessage.classList.add('show');
+                }, 100);
+            }
+
+            return isValid;
+        }
+
+        function saveCurrentSlideData() {
+            const currentSlide = document.getElementById(`slide-${currentSlideIndex}`);
+            if (!currentSlide) return;
+
+            const inputs = currentSlide.querySelectorAll('input, select, textarea');
+            inputs.forEach(input => {
+                if (input.type === 'checkbox') {
+                    if (!formData.mortgageHistory) formData.mortgageHistory = [];
+                    if (input.checked && !formData.mortgageHistory.includes(input.value)) {
+                        formData.mortgageHistory.push(input.value);
+                    } else if (!input.checked) {
+                        const index = formData.mortgageHistory.indexOf(input.value);
+                        if (index > -1) {
+                            formData.mortgageHistory.splice(index, 1);
+                        }
+                    }
+                } else {
+                    formData[input.name] = input.value;
+                }
+            });
+        }
+
+        function updateProgress(slideNumber) {
+            const dots = document.querySelectorAll('.progress-dot');
+            
+            dots.forEach((dot, index) => {
+                dot.classList.remove('active');
+                if (index < slideNumber) {
+                    dot.classList.add('completed');
+                } else if (index === slideNumber) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('completed');
+                }
+            });
+        }
+
+        function updateCounter(slideNumber) {
+            document.getElementById('currentSlide').textContent = slideNumber === 0 ? 'Start' : slideNumber;
+        }
+
+        // Add input formatting for SSN
+
+        function submitForm() {
+            // Final validation
+            saveCurrentSlideData();
+
+            // Prepare email template parameters
+            const templateParams = {
+                to_name: 'Sonia Crespo',
+                from_name: formData.borrowerName || 'Unknown',
+                borrower_name: formData.borrowerName,
+                mobile_phone: formData.mobilePhone,
+                email_address: formData.emailAddress,
+                // Add all other form fields here
+                form_data: JSON.stringify(formData, null, 2)
+            };
+
+            // Send email using EmailJS
+            emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', templateParams)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    // Show success message
+                    showSuccessMessage();
+                }, function(error) {
+                    console.log('FAILED...', error);
+                    alert('There was an error submitting your application. Please try again.');
+                });
+        }
+
+        function showSuccessMessage() {
+            const container = document.querySelector('.pre-approval-container');
+            container.innerHTML = `
+                <div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; text-align: center; color: white; padding: 2rem;">
+                    <div>
+                        <div style="font-size: 4rem; margin-bottom: 2rem;">✅</div>
+                        <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Application Submitted Successfully!</h1>
+                        <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
+                            Thank you for your application. Sonia Crespo will review your information and contact you within 24 hours.
+                        </p>
+                        <a href="index.html" style="display: inline-block; padding: 1rem 2rem; background: white; color: #1E4E8C; text-decoration: none; border-radius: 10px; font-weight: 600; transition: all 0.3s ease;">
+                            Return to Home
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCounter(0);
+            
+            // Format SSN input
+            const ssnInput = document.getElementById('socialSecurity');
+            if (ssnInput) {
+                ssnInput.addEventListener('input', function(e) {
+                    let value = e.target.value.replace(/\D/g, '');
+                    if (value.length >= 6) {
+                        value = value.substring(0, 3) + '-' + value.substring(3, 5) + '-' + value.substring(5, 9);
+                    } else if (value.length >= 3) {
+                        value = value.substring(0, 3) + '-' + value.substring(3, 5);
+                    }
+                    e.target.value = value;
+                });
+            }
+        });
+    </script>
+</body>
+</html>
