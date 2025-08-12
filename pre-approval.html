@@ -507,6 +507,59 @@
             z-index: 10;
         }
 
+        /* Signature Pad Styles */
+        .signature-container {
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .signature-pad {
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            background: white;
+            width: 100%;
+            height: 200px;
+            cursor: crosshair;
+            touch-action: none;
+        }
+
+        .signature-pad:focus {
+            outline: none;
+            border-color: #1E4E8C;
+            box-shadow: 0 0 0 3px rgba(30, 78, 140, 0.1);
+        }
+
+        .signature-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .btn-signature {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            background: white;
+            color: #6b7280;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-signature:hover {
+            border-color: #1E4E8C;
+            color: #1E4E8C;
+        }
+
+        .signature-helper {
+            font-size: 0.85rem;
+            color: #6b7280;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .form-content {
@@ -536,6 +589,15 @@
             .radio-option input[type="radio"] {
                 width: 18px;
                 height: 18px;
+            }
+
+            .signature-pad {
+                height: 150px;
+            }
+
+            .signature-controls {
+                flex-direction: column;
+                align-items: center;
             }
         }
 
@@ -1495,13 +1557,21 @@
                 </div>
             </div>
 
-            <!-- Question 24: Acknowledgement -->
+            <!-- Question 24: Signature Required -->
             <div class="form-slide" id="slide-24">
                 <div class="form-content">
                     <div class="form-group">
-                        <label>Acknowledgement <span class="required">*</span></label>
+                        <label>Signature Required <span class="required">*</span></label>
+                        <div class="signature-helper">You can sign using your mouse, pointer or finger on touch screen on any mobile phone</div>
                         
-                        <div class="checkbox-item">
+                        <div class="signature-container">
+                            <canvas id="signaturePad" class="signature-pad" width="600" height="200"></canvas>
+                            <div class="signature-controls">
+                                <button type="button" class="btn-signature" onclick="clearSignature()">CLEAR</button>
+                            </div>
+                        </div>
+
+                        <div class="checkbox-item" style="margin-top: 2rem;">
                             <input type="checkbox" id="finalAcknowledgement" name="finalAcknowledgement" value="acknowledged" required>
                             <label for="finalAcknowledgement">By checking the box above and submitting form. I/we agree to the terms and conditions set forth below</label>
                         </div>
@@ -1669,6 +1739,86 @@
             }
         }
 
+        // Signature Pad functionality
+        let canvas, ctx, isDrawing = false, signatureData = '';
+
+        function initSignaturePad() {
+            canvas = document.getElementById('signaturePad');
+            if (!canvas) return;
+            
+            ctx = canvas.getContext('2d');
+            
+            // Set canvas size to match display size
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width * window.devicePixelRatio;
+            canvas.height = rect.height * window.devicePixelRatio;
+            ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+            
+            // Set drawing styles
+            ctx.strokeStyle = '#1E4E8C';
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            
+            // Mouse events
+            canvas.addEventListener('mousedown', startDrawing);
+            canvas.addEventListener('mousemove', draw);
+            canvas.addEventListener('mouseup', stopDrawing);
+            canvas.addEventListener('mouseout', stopDrawing);
+            
+            // Touch events
+            canvas.addEventListener('touchstart', handleTouch);
+            canvas.addEventListener('touchmove', handleTouch);
+            canvas.addEventListener('touchend', stopDrawing);
+            
+            function startDrawing(e) {
+                isDrawing = true;
+                const pos = getEventPos(e);
+                ctx.beginPath();
+                ctx.moveTo(pos.x, pos.y);
+            }
+            
+            function draw(e) {
+                if (!isDrawing) return;
+                const pos = getEventPos(e);
+                ctx.lineTo(pos.x, pos.y);
+                ctx.stroke();
+            }
+            
+            function stopDrawing() {
+                if (isDrawing) {
+                    isDrawing = false;
+                    signatureData = canvas.toDataURL();
+                }
+            }
+            
+            function handleTouch(e) {
+                e.preventDefault();
+                const touch = e.touches[0];
+                const mouseEvent = new MouseEvent(e.type === 'touchstart' ? 'mousedown' : 
+                    e.type === 'touchmove' ? 'mousemove' : 'mouseup', {
+                    clientX: touch.clientX,
+                    clientY: touch.clientY
+                });
+                canvas.dispatchEvent(mouseEvent);
+            }
+            
+            function getEventPos(e) {
+                const rect = canvas.getBoundingClientRect();
+                return {
+                    x: e.clientX - rect.left,
+                    y: e.clientY - rect.top
+                };
+            }
+        }
+
+        function clearSignature() {
+            if (ctx) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                signatureData = '';
+            }
+        }
+
         function validateCurrentSlide() {
             const currentSlide = document.getElementById(`slide-${currentSlideIndex}`);
             if (!currentSlide) return true;
@@ -1702,6 +1852,20 @@
                 const hasSelection = Array.from(checkboxes).some(cb => cb.checked);
                 if (!hasSelection) {
                     isValid = false;
+                }
+            }
+
+            // Special validation for signature on slide 24
+            if (currentSlideIndex === 24) {
+                if (!signatureData || signatureData === '') {
+                    isValid = false;
+                    if (canvas) {
+                        canvas.style.borderColor = '#dc3545';
+                    }
+                } else {
+                    if (canvas) {
+                        canvas.style.borderColor = '#e1e5e9';
+                    }
                 }
             }
 
@@ -1756,11 +1920,14 @@
             document.getElementById('currentSlide').textContent = slideNumber === 0 ? 'Start' : slideNumber;
         }
 
-        // Add input formatting for SSN
-
         function submitForm() {
             // Final validation
             saveCurrentSlideData();
+
+            // Add signature to form data
+            if (signatureData) {
+                formData.signature = signatureData;
+            }
 
             // Prepare email template parameters
             const templateParams = {
@@ -1769,6 +1936,7 @@
                 borrower_name: formData.borrowerName,
                 mobile_phone: formData.mobilePhone,
                 email_address: formData.emailAddress,
+                signature: signatureData,
                 // Add all other form fields here
                 form_data: JSON.stringify(formData, null, 2)
             };
@@ -1806,6 +1974,23 @@
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
             updateCounter(0);
+            
+            // Initialize signature pad when slide 24 is shown
+            const observer = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                        const slide24 = document.getElementById('slide-24');
+                        if (slide24 && slide24.classList.contains('active')) {
+                            setTimeout(initSignaturePad, 100);
+                        }
+                    }
+                });
+            });
+            
+            const slide24 = document.getElementById('slide-24');
+            if (slide24) {
+                observer.observe(slide24, { attributes: true });
+            }
             
             // Format SSN input
             const ssnInput = document.getElementById('socialSecurity');
