@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ready To Mortgage - Pre-Approval Application</title>
+    <title>Ready To Mortgage - Solicitud de preaprobación</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/styles.css">
     <style>
@@ -632,10 +632,10 @@
                 <div class="start-screen">
                     <h1 class="start-title">2025 ONLINE 1003 APPLICATION - SONIA</h1>
                     <p class="start-subtitle">Link in English to the right</p>
-                    <p class="start-description">24 Questions</p>
+                    <p class="start-description">24 Preguntas</p>
                     
                     <button type="button" class="btn-start" onclick="startForm()">
-                        START
+                        INICIAR
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -647,13 +647,13 @@
             <div class="form-slide" id="slide-1">
                 <div class="form-content">
                     <div class="form-group">
-                        <label for="borrowerName">Borrower Name <span class="required">*</span></label>
+                        <label for="borrowerName">Nombre del solicitante <span class="required">*</span></label>
                         <input type="text" id="borrowerName" name="borrowerName" class="form-input" required>
                     </div>
                 </div>
                 
                 <div class="error-message" id="error-1">
-                    There are incomplete required fields. Please complete them.
+                    Hay campos obligatorios incompletos. Por favor, complételos.
                 </div>
                 
                 <div class="form-navigation">
@@ -661,10 +661,10 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        PREVIOUS
+                        ANTERIOR
                     </button>
                     <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
-                        NEXT
+                        SIGUIENTE
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -676,14 +676,14 @@
             <div class="form-slide" id="slide-2">
                 <div class="form-content">
                     <div class="form-group">
-                        <label for="contactInfo">Borrower Contact Information <span class="required">*</span></label>
-                        <input type="tel" id="mobilePhone" name="mobilePhone" class="form-input" placeholder="Mobile Phone" required style="margin-bottom: 1rem;">
-                        <input type="email" id="emailAddress" name="emailAddress" class="form-input" placeholder="Email Address" required>
+                        <label for="contactInfo">Información de contacto del solicitante <span class="required">*</span></label>
+                        <input type="tel" id="mobilePhone" name="mobilePhone" class="form-input" placeholder="Teléfono móvil" required style="margin-bottom: 1rem;">
+                        <input type="email" id="emailAddress" name="emailAddress" class="form-input" placeholder="Dirección de correo electrónico" required>
                     </div>
                 </div>
                 
                 <div class="error-message" id="error-2">
-                    There are incomplete required fields. Please complete them.
+                    Hay campos obligatorios incompletos. Por favor, complételos.
                 </div>
                 
                 <div class="form-navigation">
@@ -691,10 +691,10 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        PREVIOUS
+                        ANTERIOR
                     </button>
                     <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
-                        NEXT
+                        SIGUIENTE
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -706,47 +706,47 @@
             <div class="form-slide" id="slide-3">
                 <div class="form-content">
                     <div class="form-group">
-                        <label for="loanInfo">Borrower Loan Information <span class="required">*</span></label>
-                        
+                        <label for="loanInfo">Información del préstamo del solicitante <span class="required">*</span></label>
+
                         <div style="margin-bottom: 1rem;">
-                            <div class="helper-text">Who is applying for this loan?</div>
+                            <div class="helper-text">¿Quién está solicitando este préstamo?</div>
                             <select id="whoApplying" name="whoApplying" class="form-select" required>
-                                <option value="">Select</option>
-                                <option value="individually">Applying individually</option>
-                                <option value="spouse">Applying jointly with spouse</option>
-                                <option value="another">Applying jointly with another person</option>
-                                <option value="multiple">More than 2 people applying for this loan</option>
+                                <option value="">Seleccionar</option>
+                                <option value="individually">Solicitando individualmente</option>
+                                <option value="spouse">Solicitando conjuntamente con el cónyuge</option>
+                                <option value="another">Solicitando conjuntamente con otra persona</option>
+                                <option value="multiple">Más de 2 personas solicitando este préstamo</option>
                             </select>
                         </div>
 
                         <div style="margin-bottom: 1rem;">
-                            <div class="helper-text">Property Description</div>
+                            <div class="helper-text">Descripción de la propiedad</div>
                             <select id="propertyDescription" name="propertyDescription" class="form-select" required>
-                                <option value="">Select</option>
-                                <option value="single-family">Single family</option>
-                                <option value="multi-family">Multi-family</option>
-                                <option value="condominium">Condominium</option>
-                                <option value="mixed">Mixed property</option>
-                                <option value="commercial">Commercial Property</option>
-                                <option value="mobile">Mobile/Manufactured</option>
+                                <option value="">Seleccionar</option>
+                                <option value="single-family">Unifamiliar</option>
+                                <option value="multi-family">Multifamiliar</option>
+                                <option value="condominium">Condominio</option>
+                                <option value="mixed">Propiedad Mixta</option>
+                                <option value="commercial">Propiedad Comercial</option>
+                                <option value="mobile">Móvil/Manufacturada</option>
                             </select>
                         </div>
 
                         <div style="margin-bottom: 1rem;">
-                            <div class="helper-text">Purpose of the Loan</div>
+                            <div class="helper-text">Propósito del Préstamo</div>
                             <select id="loanPurpose" name="loanPurpose" class="form-select" required>
-                                <option value="">Select</option>
-                                <option value="purchase">Purchase - I'm purchasing a property and I have an accepted contract with a seller.</option>
-                                <option value="pre-qualification">Pre-qualification - I'm shopping for a property and I don't have an accepted contract with a seller.</option>
-                                <option value="refinance-balance">Refinance Existing Balance - I'd like to refinance the existing mortgage balance on my property.</option>
-                                <option value="refinance-cash">Refinance to Obtain Cash - I'd like to refinance my property and obtain cash at closing.</option>
+                                <option value="">Seleccionar</option>
+                                <option value="purchase">Compra - Estoy comprando una propiedad y tengo un contrato aceptado con un vendedor.</option>
+                                <option value="pre-qualification">Pre-calificación - Estoy buscando una propiedad y no tengo un contrato aceptado con un vendedor.</option>
+                                <option value="refinance-balance">Refinanciar Saldo Existente - Me gustaría refinanciar el saldo hipotecario existente de mi propiedad.</option>
+                                <option value="refinance-cash">Refinanciar para Obtener Efectivo - Me gustaría refinanciar mi propiedad y obtener efectivo en el cierre.</option>
                             </select>
                         </div>
 
                         <div>
-                            <div class="helper-text">Requested Loan Amount</div>
+                            <div class="helper-text">Monto del Préstamo Solicitado</div>
                             <select id="loanAmount" name="loanAmount" class="form-select" required>
-                                <option value="">Select</option>
+                                <option value="">Seleccionar</option>
                                 <option value="100000">100,000</option>
                                 <option value="110000">110,000</option>
                                 <option value="120000">120,000</option>
@@ -784,7 +784,7 @@
                 </div>
                 
                 <div class="error-message" id="error-3">
-                    There are incomplete required fields. Please complete them.
+                    Hay campos obligatorios incompletos. Por favor, complételos.
                 </div>
                 
                 <div class="form-navigation">
@@ -792,10 +792,10 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        PREVIOUS
+                        ANTERIOR
                     </button>
                     <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
-                        NEXT
+                        SIGUIENTE
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -807,13 +807,13 @@
             <div class="form-slide" id="slide-4">
                 <div class="form-content">
                     <div class="form-group">
-                        <label for="dateOfBirth">Primary Borrower Date of Birth <span class="required">*</span></label>
+                        <label for="dateOfBirth">Fecha de Nacimiento del Solicitante Principal <span class="required">*</span></label>
                         <input type="date" id="dateOfBirth" name="dateOfBirth" class="form-input" required>
                     </div>
                 </div>
                 
                 <div class="error-message" id="error-4">
-                    There are incomplete required fields. Please complete them.
+                   Hay campos obligatorios incompletos. Por favor, complételos.
                 </div>
                 
                 <div class="form-navigation">
@@ -821,10 +821,10 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        PREVIOUS
+                        ANTERIOR
                     </button>
                     <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
-                        NEXT
+                        SIGUIENTE
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -836,8 +836,8 @@
             <div class="form-slide" id="slide-5">
                 <div class="form-content">
                     <div class="form-group">
-                        <label for="socialSecurity">Primary Borrower Social Security #</label>
-                        <div class="helper-text">ITIN Borrower: Replace SS# with ITIN Tax ID Number</div>
+                        <label for="socialSecurity">Número de Seguro Social del Solicitante Principal</label>
+                        <div class="helper-text">Prestatario con ITIN: reemplace el número de seguro social con el número de identificación fiscal del ITIN</div>
                         <input type="text" id="socialSecurity" name="socialSecurity" class="form-input" placeholder="XXX-XX-XXXX">
                     </div>
                 </div>
@@ -847,10 +847,10 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        PREVIOUS
+                        ANTERIOR
                     </button>
                     <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
-                        NEXT
+                        SIGUIENTE
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -862,20 +862,20 @@
             <div class="form-slide" id="slide-6">
                 <div class="form-content">
                     <div class="form-group">
-                        <label for="maritalStatus">Marital Status <span class="required">*</span></label>
+                        <label for="maritalStatus">Estado Civil <span class="required">*</span></label>
                         <select id="maritalStatus" name="maritalStatus" class="form-select" required>
-                            <option value="">Please Select</option>
-                            <option value="single">Single</option>
-                            <option value="married">Married</option>
-                            <option value="divorced">Divorced</option>
-                            <option value="divorced-alimony">Divorced w/ Alimony</option>
-                            <option value="divorced-alimony-child">Divorced w/ Alimony & Child Support</option>
+                            <option value="">Por favor seleccione</option>
+                            <option value="single">Soltero</option>
+                            <option value="married">Casado</option>
+                            <option value="divorced">Divorciado</option>
+                            <option value="divorced-alimony">Divorciado con Pensión Alimenticia</option>
+                            <option value="divorced-alimony-child">Divorciado con Pensión Alimenticia y Manutención Infantil</option>
                         </select>
                     </div>
                 </div>
                 
                 <div class="error-message" id="error-6">
-                    There are incomplete required fields. Please complete them.
+                    Hay campos obligatorios incompletos. Por favor, complétalos.
                 </div>
                 
                 <div class="form-navigation">
@@ -883,10 +883,10 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        PREVIOUS
+                        ANTERIOR
                     </button>
                     <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
-                        NEXT
+                        SIGUIENTE
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -898,15 +898,15 @@
             <div class="form-slide" id="slide-7">
                 <div class="form-content">
                     <div class="form-group">
-                        <label for="dependents">Dependents (optional)</label>
+                        <label for="dependents">Dependientes (opcional)</label>
                         <select id="dependents" name="dependents" class="form-select">
-                            <option value="">Please Select</option>
-                            <option value="children">Children</option>
-                            <option value="non-custodial">Non-Custodial</option>
-                            <option value="parents">Parents</option>
-                            <option value="direct-family">Direct Family Relatives</option>
-                            <option value="distant-relatives">Distant Relatives</option>
-                            <option value="none">None of the above</option>
+                            <option value="">Por favor seleccione</option>
+                            <option value="children">Niños</option>
+                            <option value="non-custodial">No Custodial</option>
+                            <option value="parents">Padres</option>
+                            <option value="direct-family">Familia Directa</option>
+                            <option value="distant-relatives">Parientes Lejanos</option>
+                            <option value="none">Ninguno de los anteriores</option>
                         </select>
                     </div>
                 </div>
@@ -916,10 +916,10 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        PREVIOUS
+                        ANTERIOR
                     </button>
                     <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
-                        NEXT
+                        SIGUIENTE
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -931,20 +931,20 @@
             <div class="form-slide" id="slide-8">
                 <div class="form-content">
                     <div class="form-group">
-                        <label for="currentAddress">Your Current Property Address <span class="required">*</span></label>
-                        
+                        <label for="currentAddress">Tu Dirección Actual de Propiedad <span class="required">*</span></label>
+
                         <div class="address-grid">
-                            <input type="text" id="streetAddress" name="streetAddress" class="form-input" placeholder="Street Address" required>
-                            <input type="text" id="streetAddress2" name="streetAddress2" class="form-input" placeholder="Street Address Line 2">
-                            <input type="text" id="city" name="city" class="form-input" placeholder="City" required>
-                            <input type="text" id="stateProvince" name="stateProvince" class="form-input" placeholder="State / Province" required>
-                            <input type="text" id="postalCode" name="postalCode" class="form-input" placeholder="Postal / Zip Code" required>
+                            <input type="text" id="streetAddress" name="streetAddress" class="form-input" placeholder="Dirección" required>
+                            <input type="text" id="streetAddress2" name="streetAddress2" class="form-input" placeholder="Línea de Dirección 2">
+                            <input type="text" id="city" name="city" class="form-input" placeholder="Ciudad" required>
+                            <input type="text" id="stateProvince" name="stateProvince" class="form-input" placeholder="Estado / Provincia" required>
+                            <input type="text" id="postalCode" name="postalCode" class="form-input" placeholder="Código Postal" required>
                         </div>
                     </div>
                 </div>
                 
                 <div class="error-message" id="error-8">
-                    There are incomplete required fields. Please complete them.
+                    Hay campos obligatorios incompletos. Por favor, complétalos.
                 </div>
                 
                 <div class="form-navigation">
@@ -952,10 +952,10 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        PREVIOUS
+                        ANTERIOR
                     </button>
                     <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
-                        NEXT
+                        SIGUIENTE
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -967,10 +967,10 @@
             <div class="form-slide" id="slide-9">
                 <div class="form-content">
                     <div class="form-group">
-                        <label>Have you lived at that address for more than two years? <span class="required">*</span></label>
-                        
+                        <label>¿Has vivido en esa dirección durante más de dos años? <span class="required">*</span></label>
+
                         <div class="yes-no-buttons">
-                            <button type="button" class="btn-choice" data-value="yes" onclick="selectYesNo(this, 'livedTwoYears')">YES</button>
+                            <button type="button" class="btn-choice" data-value="yes" onclick="selectYesNo(this, 'livedTwoYears')">SÍ</button>
                             <button type="button" class="btn-choice no" data-value="no" onclick="selectYesNo(this, 'livedTwoYears')">NO</button>
                         </div>
                         <input type="hidden" id="livedTwoYears" name="livedTwoYears" required>
@@ -978,7 +978,7 @@
                 </div>
                 
                 <div class="error-message" id="error-9">
-                    There are incomplete required fields. Please complete them.
+                    Hay campos obligatorios incompletos. Por favor, complétalos.
                 </div>
                 
                 <div class="form-navigation">
@@ -986,10 +986,10 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        PREVIOUS
+                        ANTERIOR
                     </button>
                     <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
-                        NEXT
+                        SIGUIENTE
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -1001,29 +1001,29 @@
             <div class="form-slide" id="slide-10">
                 <div class="form-content">
                     <div class="form-group">
-                        <label>Borrower Mortgage Event History <span class="required">*</span></label>
-                        <div class="helper-text">Within the last 7 years</div>
-                        
+                        <label>Historial de Eventos Hipotecarios del Prestatario <span class="required">*</span></label>
+                        <div class="helper-text">En los últimos 7 años</div>
+
                         <div class="checkbox-group">
                             <div class="checkbox-item" onclick="toggleCheckbox(this, 'bankruptcy')">
                                 <input type="checkbox" id="bankruptcy" name="mortgageHistory" value="bankruptcy">
-                                <label for="bankruptcy">Bankruptcy</label>
+                                <label for="bankruptcy">Bancarrota</label>
                             </div>
                             <div class="checkbox-item" onclick="toggleCheckbox(this, 'foreclosure')">
                                 <input type="checkbox" id="foreclosure" name="mortgageHistory" value="foreclosure">
-                                <label for="foreclosure">Foreclosure</label>
+                                <label for="foreclosure">Ejecutivo Hipotecario</label>
                             </div>
                             <div class="checkbox-item" onclick="toggleCheckbox(this, 'shortSale')">
                                 <input type="checkbox" id="shortSale" name="mortgageHistory" value="shortSale">
-                                <label for="shortSale">Short Sale</label>
+                                <label for="shortSale">Venta Corta</label>
                             </div>
                             <div class="checkbox-item selected" onclick="toggleCheckbox(this, 'deedInLieu')">
                                 <input type="checkbox" id="deedInLieu" name="mortgageHistory" value="deedInLieu" checked>
-                                <label for="deedInLieu">Deed in Lieu</label>
+                                <label for="deedInLieu">Escritura en lugar de ejecución hipotecaria</label>
                             </div>
                             <div class="checkbox-item checkbox-single" onclick="toggleCheckbox(this, 'noneAbove')">
                                 <input type="checkbox" id="noneAbove" name="mortgageHistory" value="noneAbove">
-                                <label for="noneAbove">NONE OF THE ABOVE</label>
+                                <label for="noneAbove">NINGUNO DE LOS ANTERIORES</label>
                             </div>
                         </div>
                     </div>
@@ -1034,10 +1034,10 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        PREVIOUS
+                        ANTERIOR
                     </button>
                     <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
-                        NEXT
+                        SIGUIENTE
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -1049,10 +1049,10 @@
             <div class="form-slide" id="slide-11">
                 <div class="form-content">
                     <div class="form-group">
-                        <label>Is the Primary Borrower Retired?</label>
-                        
+                        <label>¿Está jubilado el prestatario principal?</label>
+
                         <div class="yes-no-buttons">
-                            <button type="button" class="btn-choice" data-value="yes" onclick="selectYesNo(this, 'isRetired')">YES</button>
+                            <button type="button" class="btn-choice" data-value="yes" onclick="selectYesNo(this, 'isRetired')">SÍ</button>
                             <button type="button" class="btn-choice no" data-value="no" onclick="selectYesNo(this, 'isRetired')">NO</button>
                         </div>
                         <input type="hidden" id="isRetired" name="isRetired">
@@ -1064,10 +1064,10 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        PREVIOUS
+                        ANTERIOR
                     </button>
                     <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
-                        NEXT
+                        SIGUIENTE
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -1079,18 +1079,18 @@
             <div class="form-slide" id="slide-12">
                 <div class="form-content">
                     <div class="form-group">
-                        <label>Borrower primary source of income? <span class="required">*</span></label>
-                        
+                        <label>¿Cuál es la fuente principal de ingresos del prestatario? <span class="required">*</span></label>
+
                         <div class="yes-no-buttons">
-                            <button type="button" class="btn-choice" data-value="w2" onclick="selectYesNo(this, 'incomeSource')">W-2 Wage Earner</button>
-                            <button type="button" class="btn-choice" data-value="self-employed" onclick="selectYesNo(this, 'incomeSource')">Self-Employed</button>
+                            <button type="button" class="btn-choice" data-value="w2" onclick="selectYesNo(this, 'incomeSource')">Asalariado W-2</button>
+                            <button type="button" class="btn-choice" data-value="self-employed" onclick="selectYesNo(this, 'incomeSource')">Trabajador Autónomo</button>
                         </div>
                         <input type="hidden" id="incomeSource" name="incomeSource" value="" required>
                     </div>
                 </div>
                 
                 <div class="error-message" id="error-12">
-                    There are incomplete required fields. Please complete them.
+                    Hay campos obligatorios incompletos. Por favor, complétalos.
                 </div>
                 
                 <div class="form-navigation">
@@ -1098,10 +1098,10 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        PREVIOUS
+                        ANTERIOR
                     </button>
                     <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
-                        NEXT
+                        SIGUIENTE
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -1113,34 +1113,34 @@
             <div class="form-slide" id="slide-13">
                 <div class="form-content">
                     <div class="form-group">
-                        <label>List Retirement Income for Primary Borrower</label>
-                        
+                        <label>Lista de ingresos por jubilación para el prestatario principal</label>
+
                         <div class="retirement-income-grid">
                             <div class="income-field">
                                 <input type="number" id="socialSecurityIncome" name="socialSecurityIncome" class="form-input" placeholder="0">
-                                <label for="socialSecurityIncome" class="field-label">Social Security Income</label>
+                                <label for="socialSecurityIncome" class="field-label">Ingresos de Seguridad Social</label>
                             </div>
                             
                             <div class="income-field">
                                 <input type="number" id="disabilityIncome" name="disabilityIncome" class="form-input" placeholder="0">
-                                <label for="disabilityIncome" class="field-label">Disability Income</label>
+                                <label for="disabilityIncome" class="field-label">Ingresos por Discapacidad</label>
                             </div>
                             
                             <div class="income-field">
                                 <input type="number" id="annuitiesPensions" name="annuitiesPensions" class="form-input" placeholder="0">
-                                <label for="annuitiesPensions" class="field-label">Annuities & Pensions</label>
+                                <label for="annuitiesPensions" class="field-label">Anualidades y Pensiones</label>
                             </div>
                             
                             <div class="income-field">
                                 <input type="number" id="thirdPartyIncome" name="thirdPartyIncome" class="form-input" placeholder="0">
-                                <label for="thirdPartyIncome" class="field-label">Third Party Income</label>
+                                <label for="thirdPartyIncome" class="field-label">Ingresos de Terceros</label>
                             </div>
                         </div>
                     </div>
                 </div>
                 
                 <div class="error-message" id="error-13">
-                    There are incomplete required fields. Please complete them.
+                    Hay campos obligatorios incompletos. Por favor, complétalos.
                 </div>
                 
                 <div class="form-navigation">
@@ -1148,10 +1148,10 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        PREVIOUS
+                        ANTERIOR
                     </button>
                     <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
-                        NEXT
+                        SIGUIENTE
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -1163,10 +1163,10 @@
             <div class="form-slide" id="slide-14">
                 <div class="form-content">
                     <div class="form-group">
-                        <label>Is there a Co-Borrower? <span class="required">*</span></label>
-                        
+                        <label>¿Hay un co-prestatario? <span class="required">*</span></label>
+
                         <div class="yes-no-buttons">
-                            <button type="button" class="btn-choice" data-value="yes" onclick="selectYesNo(this, 'coBorrower')">YES</button>
+                            <button type="button" class="btn-choice" data-value="yes" onclick="selectYesNo(this, 'coBorrower')">SI</button>
                             <button type="button" class="btn-choice" data-value="no" onclick="selectYesNo(this, 'coBorrower')">NO</button>
                         </div>
                         <input type="hidden" id="coBorrower" name="coBorrower" value="" required>
@@ -1174,7 +1174,7 @@
                 </div>
                 
                 <div class="error-message" id="error-14">
-                    There are incomplete required fields. Please complete them.
+                    Hay campos obligatorios incompletos. Por favor, complétalos.
                 </div>
                 
                 <div class="form-navigation">
@@ -1182,10 +1182,10 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        PREVIOUS
+                        ANTERIOR
                     </button>
                     <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
-                        NEXT
+                        SIGUIENTE
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -1197,10 +1197,10 @@
             <div class="form-slide" id="slide-15">
                 <div class="form-content">
                     <div class="form-group">
-                        <label>Are you a US Citizen? <span class="required">*</span></label>
-                        
+                        <label>¿Es usted ciudadano de EE. UU.? <span class="required">*</span></label>
+
                         <div class="yes-no-buttons">
-                            <button type="button" class="btn-choice" data-value="yes" onclick="selectYesNo(this, 'usCitizen')">YES</button>
+                            <button type="button" class="btn-choice" data-value="yes" onclick="selectYesNo(this, 'usCitizen')">SI</button>
                             <button type="button" class="btn-choice" data-value="no" onclick="selectYesNo(this, 'usCitizen')">NO</button>
                         </div>
                         <input type="hidden" id="usCitizen" name="usCitizen" value="" required>
@@ -1208,7 +1208,7 @@
                 </div>
                 
                 <div class="error-message" id="error-15">
-                    There are incomplete required fields. Please complete them.
+                    Hay campos obligatorios incompletos. Por favor, complétalos.
                 </div>
                 
                 <div class="form-navigation">
@@ -1216,10 +1216,10 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        PREVIOUS
+                        ANTERIOR
                     </button>
                     <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
-                        NEXT
+                        SIGUIENTE
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -1231,18 +1231,18 @@
             <div class="form-slide" id="slide-16">
                 <div class="form-content">
                     <div class="form-group">
-                        <label>Are there any outstanding judgements against you? <span class="required">*</span></label>
-                        
+                        <label>¿Hay algún juicio pendiente en su contra? <span class="required">*</span></label>
+
                         <div class="yes-no-buttons">
                             <button type="button" class="btn-choice" data-value="no" onclick="selectYesNo(this, 'outstandingJudgements')">NO</button>
-                            <button type="button" class="btn-choice" data-value="yes" onclick="selectYesNo(this, 'outstandingJudgements')">YES</button>
+                            <button type="button" class="btn-choice" data-value="yes" onclick="selectYesNo(this, 'outstandingJudgements')">SI</button>
                         </div>
                         <input type="hidden" id="outstandingJudgements" name="outstandingJudgements" value="" required>
                     </div>
                 </div>
                 
                 <div class="error-message" id="error-16">
-                    There are incomplete required fields. Please complete them.
+                    Hay campos obligatorios incompletos. Por favor, complétalos.
                 </div>
                 
                 <div class="form-navigation">
@@ -1250,10 +1250,10 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        PREVIOUS
+                        ANTERIOR
                     </button>
                     <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
-                        NEXT
+                        SIGUIENTE
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -1265,18 +1265,18 @@
             <div class="form-slide" id="slide-17">
                 <div class="form-content">
                     <div class="form-group">
-                        <label>Are you a party to an active lawsuit? <span class="required">*</span></label>
-                        
+                        <label>¿Es usted parte de un juicio activo? <span class="required">*</span></label>
+
                         <div class="yes-no-buttons">
                             <button type="button" class="btn-choice" data-value="no" onclick="selectYesNo(this, 'activeLawsuit')">NO</button>
-                            <button type="button" class="btn-choice" data-value="yes" onclick="selectYesNo(this, 'activeLawsuit')">YES</button>
+                            <button type="button" class="btn-choice" data-value="yes" onclick="selectYesNo(this, 'activeLawsuit')">SI</button>
                         </div>
                         <input type="hidden" id="activeLawsuit" name="activeLawsuit" value="" required>
                     </div>
                 </div>
                 
                 <div class="error-message" id="error-17">
-                    There are incomplete required fields. Please complete them.
+                    Hay campos obligatorios incompletos. Por favor, complétalos.
                 </div>
                 
                 <div class="form-navigation">
@@ -1284,10 +1284,10 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        PREVIOUS
+                        ANTERIOR
                     </button>
                     <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
-                        NEXT
+                        SIGUIENTE
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -1299,18 +1299,18 @@
             <div class="form-slide" id="slide-18">
                 <div class="form-content">
                     <div class="form-group">
-                        <label>Do you have an active IRS tax Lien? <span class="required">*</span></label>
-                        
+                        <label>¿Tiene un gravamen fiscal activo del IRS? <span class="required">*</span></label>
+
                         <div class="yes-no-buttons">
                             <button type="button" class="btn-choice" data-value="no" onclick="selectYesNo(this, 'irsTaxLien')">NO</button>
-                            <button type="button" class="btn-choice" data-value="yes" onclick="selectYesNo(this, 'irsTaxLien')">YES</button>
+                            <button type="button" class="btn-choice" data-value="yes" onclick="selectYesNo(this, 'irsTaxLien')">SI</button>
                         </div>
                         <input type="hidden" id="irsTaxLien" name="irsTaxLien" value="" required>
                     </div>
                 </div>
                 
                 <div class="error-message" id="error-18">
-                    There are incomplete required fields. Please complete them.
+                    Hay campos obligatorios incompletos. Por favor, complétalos.
                 </div>
                 
                 <div class="form-navigation">
@@ -1318,10 +1318,10 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        PREVIOUS
+                        ANTERIOR
                     </button>
                     <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
-                        NEXT
+                        SIGUIENTE
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -1333,18 +1333,18 @@
             <div class="form-slide" id="slide-19">
                 <div class="form-content">
                     <div class="form-group">
-                        <label>Do you have any deferred Student Loans? <span class="required">*</span></label>
-                        
+                        <label>¿Tiene algún préstamo estudiantil en espera? <span class="required">*</span></label>
+
                         <div class="yes-no-buttons">
                             <button type="button" class="btn-choice" data-value="no" onclick="selectYesNo(this, 'deferredStudentLoans')">NO</button>
-                            <button type="button" class="btn-choice" data-value="yes" onclick="selectYesNo(this, 'deferredStudentLoans')">YES</button>
+                            <button type="button" class="btn-choice" data-value="yes" onclick="selectYesNo(this, 'deferredStudentLoans')">SI</button>
                         </div>
                         <input type="hidden" id="deferredStudentLoans" name="deferredStudentLoans" value="" required>
                     </div>
                 </div>
                 
                 <div class="error-message" id="error-19">
-                    There are incomplete required fields. Please complete them.
+                    Hay campos obligatorios incompletos. Por favor, complétalos.
                 </div>
                 
                 <div class="form-navigation">
@@ -1352,10 +1352,10 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        PREVIOUS
+                        ANTERIOR
                     </button>
                     <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
-                        NEXT
+                        SIGUIENTE
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -1367,26 +1367,26 @@
             <div class="form-slide" id="slide-20">
                 <div class="form-content">
                     <div class="form-group">
-                        <label for="hearAboutUs">How did you hear about us? <span class="required">*</span></label>
-                        
+                        <label for="hearAboutUs">¿Cómo se enteró de nosotros? <span class="required">*</span></label>
+
                         <div class="select-container">
                             <select id="hearAboutUs" name="hearAboutUs" class="form-select" required>
-                                <option value="">Select</option>
-                                <option value="google-review">Google Review</option>
-                                <option value="website">Our Website</option>
-                                <option value="online-ad">Online Ad</option>
-                                <option value="email-flyer">Email Flyer</option>
+                                <option value="">Seleccione</option>
+                                <option value="google-review">Reseña de Google</option>
+                                <option value="website">Nuestro sitio web</option>
+                                <option value="online-ad">Anuncio en línea</option>
+                                <option value="email-flyer">Folleto por correo electrónico</option>
                                 <option value="zillow">Zillow</option>
                                 <option value="better-business-bureau">Better Business Bureau</option>
-                                <option value="marketing-brochure">Marketing Brochure</option>
-                                <option value="realtor-referral">Realtor Referral</option>
+                                <option value="marketing-brochure">Folleto de marketing</option>
+                                <option value="realtor-referral">Referencia de agente inmobiliario</option>
                             </select>
                         </div>
                     </div>
                 </div>
                 
                 <div class="error-message" id="error-20">
-                    There are incomplete required fields. Please complete them.
+                    Hay campos obligatorios incompletos. Por favor, complétalos.
                 </div>
                 
                 <div class="form-navigation">
@@ -1394,10 +1394,10 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        PREVIOUS
+                        ANTERIOR
                     </button>
                     <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
-                        NEXT
+                        SIGUIENTE
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -1409,17 +1409,17 @@
             <div class="form-slide" id="slide-21">
                 <div class="form-content">
                     <div class="form-group">
-                        <label>Credit Check <span class="required">*</span></label>
-                        
+                        <label>Verificación de Crédito <span class="required">*</span></label>
+
                         <div class="credit-check-notice">
-                            <p>WE DO NOT AUTOMATICALLY PULL YOUR CREDIT BY CHECKING THIS BOX! WE FIRST REVIEW YOUR FINANCIALS AND CALL YOU TO OBTAIN YOUR VERBAL AUTHORIZATION</p>
+                            <p></p>¡NO PULLAMOS SU CRÉDITO AUTOMÁTICAMENTE AL MARCAR ESTA CASILLA! PRIMERO REVISAMOS SUS FINANZAS Y LO LLAMAMOS PARA OBTENER SU AUTORIZACIÓN VERBAL!</p>
                         </div>
                         
                         <div class="credit-authorization-container">
                             <div class="radio-option">
                                 <input type="radio" id="creditAuthorization" name="creditAuthorization" value="authorized" required>
                                 <label for="creditAuthorization" class="radio-label">
-                                    <span class="radio-text">The Borrower and Co-Borrower (if any) hereby grant permission to Ready To Mortgage, to obtain all information deemed necessary to process your mortgage loan application. This information includes, but is not limited to, your past and present employment status, your deposit accounts, your past and present consumer credit record, your mortgage record and/or your rental record. Ready To Mortgage agrees to obtain your verbal permission and consent before pulling your credit when required.</span>
+                                    <span class="radio-text">El Prestatario y el Co-Prestatario (si los hay) otorgan permiso a Ready To Mortgage para obtener toda la información que se considere necesaria para procesar su solicitud de préstamo hipotecario. Esta información incluye, entre otros, su estado laboral pasado y presente, sus cuentas de depósito, su historial de crédito al consumidor pasado y presente, su historial hipotecario y/o su historial de alquiler. Ready To Mortgage se compromete a obtener su permiso y consentimiento verbal antes de consultar su crédito cuando sea necesario.</span>
                                 </label>
                             </div>
                         </div>
@@ -1427,7 +1427,7 @@
                 </div>
                 
                 <div class="error-message" id="error-21">
-                    There are incomplete required fields. Please complete them.
+                    Hay campos obligatorios incompletos. Por favor, complétalos.
                 </div>
                 
                 <div class="form-navigation">
@@ -1435,10 +1435,10 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        PREVIOUS
+                        ANTERIOR
                     </button>
                     <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
-                        NEXT
+                        SIGUIENTE
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -1450,13 +1450,13 @@
             <div class="form-slide" id="slide-22">
                 <div class="form-content">
                     <div class="form-group">
-                        <label>Patriot Act <span class="required">*</span></label>
+                        <label>Acto Patriota<span class="required">*</span></label>
                         
                         <div class="credit-authorization-container">
                             <div class="radio-option">
                                 <input type="radio" id="patriotAct" name="patriotAct" value="acknowledged" required>
                                 <label for="patriotAct" class="radio-label">
-                                    <span class="radio-text">The Borrower and Co-Borrower (if any) hereby acknowledge and agree that to help the government fight the funding of terrorism and money laundering activities, Federal law requires all financial institutions to obtain, verify, and record information that identifies each person who opens an account. What this means for you: As part of applying for your mortgage loan, we will ask for your name, address, date of birth, and other information that will allow us to identify you. We may also ask to see your driver's license or other identifying documents.</span>
+                                    <span class="radio-text">El Prestatario y el Coprestatario (si lo hubiera) reconocen y aceptan que, para ayudar al gobierno a combatir el financiamiento del terrorismo y el lavado de dinero, la ley federal exige que todas las instituciones financieras obtengan, verifiquen y registren la información que identifica a cada persona que abre una cuenta. Esto significa que, al solicitar su préstamo hipotecario, le solicitaremos su nombre, dirección, fecha de nacimiento y otra información que nos permita identificarlo. También podríamos solicitarle su licencia de conducir u otros documentos de identificación.</span>
                                 </label>
                             </div>
                         </div>
@@ -1464,7 +1464,7 @@
                 </div>
                 
                 <div class="error-message" id="error-22">
-                    There are incomplete required fields. Please complete them.
+                    Hay campos obligatorios incompletos. Por favor, complétalos.
                 </div>
                 
                 <div class="form-navigation">
@@ -1472,10 +1472,10 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        PREVIOUS
+                        ANTERIOR
                     </button>
                     <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
-                        NEXT
+                        SIGUIENTE
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -1487,13 +1487,13 @@
             <div class="form-slide" id="slide-23">
                 <div class="form-content">
                     <div class="form-group">
-                        <label>Electronic Disclosure <span class="required">*</span></label>
-                        
+                        <label>Divulgación Electrónica <span class="required">*</span></label>
+
                         <div class="credit-authorization-container">
                             <div class="radio-option">
                                 <input type="radio" id="electronicDisclosure" name="electronicDisclosure" value="acknowledged" required>
                                 <label for="electronicDisclosure" class="radio-label">
-                                    <span class="radio-text">The Borrower and Co-Borrower (if any) hereby acknowledge and agree that by applying for a loan on-line, you agree to accept all applicable disclosures associated with this transaction in an electronic form, including disclosures required by the Truth in Lending Act, Real Estate Settlement Procedures Act and Equal Credit Opportunity Act. Paper copies will be provided for certain real estate related contracts and transactions after your loan application is received including but not limited to copies of any Mortgage events such as foreclosures, short sales and bankruptcies that would affect your ability to obtain a loan.</span>
+                                    <span class="radio-text">El Prestatario y el Coprestatario (si lo hubiera) reconocen y aceptan que, al solicitar un préstamo en línea, aceptan recibir todas las divulgaciones aplicables asociadas con esta transacción en forma electrónica, incluidas las divulgaciones requeridas por la Ley de Verdad en los Préstamos, la Ley de Procedimientos de Liquidación de Bienes Raíces y la Ley de Igualdad de Oportunidades de Crédito. Se proporcionarán copias en papel para ciertos contratos y transacciones relacionados con bienes raíces después de que se reciba su solicitud de préstamo, incluidas, entre otras, copias de cualquier evento hipotecario, como ejecuciones hipotecarias, ventas cortas y quiebras que afecten su capacidad para obtener un préstamo.</span>
                                 </label>
                             </div>
                         </div>
@@ -1501,7 +1501,7 @@
                 </div>
                 
                 <div class="error-message" id="error-23">
-                    There are incomplete required fields. Please complete them.
+                    Hay campos obligatorios incompletos. Por favor, complétalos.
                 </div>
                 
                 <div class="form-navigation">
@@ -1509,10 +1509,10 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        PREVIOUS
+                        ANTERIOR
                     </button>
                     <button type="button" class="btn-nav btn-primary" onclick="nextSlide()">
-                        NEXT
+                        SIGUIENTE
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -1524,29 +1524,29 @@
             <div class="form-slide" id="slide-24">
                 <div class="form-content">
                     <div class="form-group">
-                        <label>Signature Required <span class="required">*</span></label>
-                        <div class="signature-helper">You can sign using your mouse, pointer or finger on touch screen on any mobile phone</div>
-                        
+                        <label>Firma Requerida <span class="required">*</span></label>
+                        <div class="signature-helper">Puede firmar usando su mouse, puntero o dedo en la pantalla táctil de cualquier teléfono móvil</div>
+
                         <div class="signature-container">
                             <canvas id="signaturePad" class="signature-pad" width="600" height="200"></canvas>
                             <div class="signature-controls">
-                                <button type="button" class="btn-signature" onclick="clearSignature()">CLEAR</button>
+                                <button type="button" class="btn-signature" onclick="clearSignature()">LIMPIAR</button>
                             </div>
                         </div>
 
                         <div class="checkbox-item" style="margin-top: 2rem;">
                             <input type="checkbox" id="finalAcknowledgement" name="finalAcknowledgement" value="acknowledged" required>
-                            <label for="finalAcknowledgement">By checking the box above and submitting form. I/we agree to the terms and conditions set forth below</label>
+                            <label for="finalAcknowledgement">Al marcar la casilla anterior y enviar el formulario. Yo/nosotros aceptamos los términos y condiciones establecidos a continuación</label>
                         </div>
                         
                         <div style="margin-top: 1rem; padding: 1rem; background: #f8f9fa; border-radius: 8px; font-size: 0.9rem; color: #6b7280;">
-                            <strong>TERMS AND CONDITIONS:</strong> By checking the box above and submitting this form. I/we consent and agree that all of my information posted on this application form is true, correct and is being provided to Ready To Mortgage for a loan pre-qualification. I/We further acknowledge and agree that I/we have read and the terms and conditions provided in the Credit Check, Patriot Act and Electronic Disclosure sections.
+                            <strong>TÉRMINOS Y CONDICIONES:</strong> Al marcar la casilla anterior y enviar este formulario. Yo/nosotros consiento y acepto que toda mi información publicada en este formulario de solicitud es verdadera, correcta y se está proporcionando a Ready To Mortgage para una pre-calificación de préstamo. Yo/nosotros además reconozco y acepto que yo/nosotros hemos leído y los términos y condiciones proporcionados en las secciones de Verificación de Crédito, Ley Patriota y Divulgación Electrónica.
                         </div>
                     </div>
                 </div>
                 
                 <div class="error-message" id="error-24">
-                    There are incomplete required fields. Please complete them.
+                    Hay campos obligatorios incompletos. Por favor, complétalos.
                 </div>
                 
                 <div class="form-navigation">
@@ -1554,10 +1554,10 @@
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
-                        PREVIOUS
+                        ANTERIOR
                     </button>
                     <button type="button" class="btn-nav btn-primary" onclick="submitForm()">
-                        SUBMIT APPLICATION
+                        ENVIAR SOLICITUD
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -1995,9 +1995,9 @@
                 <div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; text-align: center; color: white; padding: 2rem;">
                     <div>
                         <div style="font-size: 4rem; margin-bottom: 2rem; animation: spin 2s linear infinite;">⏳</div>
-                        <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Submitting Application...</h1>
+                        <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Enviando Aplicación...</h1>
                         <p style="font-size: 1.2rem; opacity: 0.9;">
-                            Please wait while we process your information.
+                            Por favor espere mientras procesamos su información.
                         </p>
                     </div>
                 </div>
@@ -2018,10 +2018,10 @@
                         <div style="font-size: 4rem; margin-bottom: 2rem;">❌</div>
                         <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Error al Enviar</h1>
                         <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
-                            There was a problem submitting your application. Please try again.
+                            Hubo un problema enviando su aplicación. Por favor, inténtelo de nuevo.
                         </p>
                         <button onclick="location.reload()" style="display: inline-block; padding: 1rem 2rem; background: white; color: #1E4E8C; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">
-                            Try again
+                            Intentar de Nuevo
                         </button>
                     </div>
                 </div>
@@ -2034,12 +2034,12 @@
                 <div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; text-align: center; color: white; padding: 2rem;">
                     <div>
                         <div style="font-size: 4rem; margin-bottom: 2rem;">✅</div>
-                        <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Application Successfully Submitted!</h1>
+                        <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">¡Aplicación Enviada Exitosamente!</h1>
                         <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
-                            Thank you for your application. Sonia Crespo will review your information and contact you within 24 hours.
+                            Gracias por su aplicación. Sonia Crespo revisará su información y se contactará con usted dentro de 24 horas.
                         </p>
                         <a href="index.html" style="display: inline-block; padding: 1rem 2rem; background: white; color: #1E4E8C; text-decoration: none; border-radius: 10px; font-weight: 600; transition: all 0.3s ease;">
-                            Back to Home
+                            Regresar al Inicio
                         </a>
                     </div>
                 </div>
