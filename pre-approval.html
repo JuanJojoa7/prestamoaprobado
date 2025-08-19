@@ -30,6 +30,37 @@
             padding: 10px;
         }
 
+        .language-switch {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            z-index: 10;
+        }
+
+        .btn-language-switch {
+            padding: 0.75rem 1.5rem;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-language-switch:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
         .form-wizard {
             display: flex;
             min-height: 100vh;
@@ -544,6 +575,16 @@
                 height: 60px;
             }
 
+            .language-switch {
+                top: 1rem;
+                right: 1rem;
+            }
+
+            .btn-language-switch {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+
             .radio-label {
                 font-size: 0.85rem;
                 padding: 1rem;
@@ -625,13 +666,20 @@
             <img src="assets/img/CRP.png" alt="SSL Security Guarantee">
         </div>
 
+        <!-- Language Switch -->
+        <div class="language-switch">
+            <a href="pre-approval-es.html" class="btn-language-switch">
+                🇪🇸 ESPAÑOL
+            </a>
+        </div>
+
         <!-- Form Wizard -->
         <div class="form-wizard">
             <!-- Start Screen -->
             <div class="form-slide active" id="slide-start">
                 <div class="start-screen">
                     <h1 class="start-title">2025 ONLINE 1003 APPLICATION - SONIA</h1>
-                    <p class="start-subtitle">Link in English to the right</p>
+                    <p class="start-subtitle">Formulario en Español a la derecha</p>
                     <p class="start-description">24 Questions</p>
                     
                     <button type="button" class="btn-start" onclick="startForm()">
