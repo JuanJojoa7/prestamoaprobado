@@ -470,43 +470,6 @@
             border-color: rgba(255,255,255,0.5);
         }
 
-        .progress-bar {
-            position: fixed;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 0.5rem;
-            z-index: 10;
-        }
-
-        .progress-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.3);
-            transition: all 0.3s ease;
-        }
-
-        .progress-dot.active {
-            background: #FFD700;
-            transform: scale(1.2);
-        }
-
-        .progress-dot.completed {
-            background: #28a745;
-        }
-
-        .progress-counter {
-            position: fixed;
-            bottom: 6rem;
-            left: 50%;
-            transform: translateX(-50%);
-            color: white;
-            font-size: 1rem;
-            z-index: 10;
-        }
-
         /* Signature Pad Styles */
         .signature-container {
             margin: 2rem 0;
@@ -1601,40 +1564,6 @@
                     </button>
                 </div>
             </div>
-
-            <!-- Progress Bar -->
-            <div class="progress-bar">
-                <div class="progress-dot completed" data-slide="start"></div>
-                <div class="progress-dot active" data-slide="1"></div>
-                <div class="progress-dot" data-slide="2"></div>
-                <div class="progress-dot" data-slide="3"></div>
-                <div class="progress-dot" data-slide="4"></div>
-                <div class="progress-dot" data-slide="5"></div>
-                <div class="progress-dot" data-slide="6"></div>
-                <div class="progress-dot" data-slide="7"></div>
-                <div class="progress-dot" data-slide="8"></div>
-                <div class="progress-dot" data-slide="9"></div>
-                <div class="progress-dot" data-slide="10"></div>
-                <div class="progress-dot" data-slide="11"></div>
-                <div class="progress-dot" data-slide="12"></div>
-                <div class="progress-dot" data-slide="13"></div>
-                <div class="progress-dot" data-slide="14"></div>
-                <div class="progress-dot" data-slide="15"></div>
-                <div class="progress-dot" data-slide="16"></div>
-                <div class="progress-dot" data-slide="17"></div>
-                <div class="progress-dot" data-slide="18"></div>
-                <div class="progress-dot" data-slide="19"></div>
-                <div class="progress-dot" data-slide="20"></div>
-                <div class="progress-dot" data-slide="21"></div>
-                <div class="progress-dot" data-slide="22"></div>
-                <div class="progress-dot" data-slide="23"></div>
-                <div class="progress-dot" data-slide="24"></div>
-            </div>
-
-            <!-- Progress Counter -->
-            <div class="progress-counter">
-                <span id="currentSlide">1</span> of <span id="totalSlides">24</span>
-            </div>
         </div>
     </div>
 
@@ -1712,7 +1641,6 @@
 
             // Update progress
             updateProgress(slideNumber);
-            updateCounter(slideNumber);
             
             currentSlideIndex = slideNumber;
         }
@@ -1920,10 +1848,6 @@
             });
         }
 
-        function updateCounter(slideNumber) {
-            document.getElementById('currentSlide').textContent = slideNumber === 0 ? 'Start' : slideNumber;
-        }
-
         function submitForm() {
             // Final validation
             if (!validateCurrentSlide()) {
@@ -2124,8 +2048,6 @@
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', function() {
-            updateCounter(0);
-            
             // Initialize signature pad when slide 24 is shown
             const observer = new MutationObserver(function(mutations) {
                 mutations.forEach(function(mutation) {
