@@ -21,7 +21,7 @@ const headerTranslations = {
         nav: {
             home: "Inicio",
             services: "Servicios",
-            about: "Nosotros",
+            about: "Sobre Mí",
             contact: "Contacto",
             allServices: "Todos los Servicios",
             calculator: "Calculadora",
