@@ -4,44 +4,407 @@
     <nav>
         <ul class="nav">
             <li><a href="index.html" id="home-link">Home</a></li>
-            <li><a href="services.html" id="services-link">Services</a></li>
+            <li class="dropdown">
+                <a href="services.html" id="services-link" class="dropdown-toggle">
+                    Services <span class="dropdown-arrow">▼</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="services.html">All Services</a></li>
+                    <li><a href="https://www.drcalculator.com/mortgage/" target="_blank">Calculator</a></li>
+                    <li><a href="rate-me.html">Rate Me</a></li>
+                </ul>
+            </li>
             <li><a href="about.html" id="about-link">About</a></li>
             <li><a href="contact.html" id="contact-link">Contact</a></li>
         </ul>
     </nav>
     
-    <div class="lang-switch">
-        <a href="#" onclick="switchLanguage('en')">EN</a>
-        |
-        <a href="#" onclick="switchLanguage('es')">ES</a>
+    <div class="header-actions">
+        <div class="lang-switch">
+            <a href="javascript:void(0)" id="en-btn" onclick="window.switchLanguage('en'); return false;">EN</a>
+            |
+            <a href="javascript:void(0)" id="es-btn" onclick="window.switchLanguage('es'); return false;">ES</a>
+        </div>
+        
+        <a href="pre-approval.html" class="btn-pre-approval">
+            <span class="btn-icon">📋</span>
+            <span class="btn-text">
+                <strong>GET PRE-APPROVED</strong>
+                <small>Start Your Application</small>
+            </span>
+            <span class="btn-arrow">→</span>
+        </a>
     </div>
 </header>
 
-<script>
-function switchLanguage(lang) {
-    // Placeholder for language switching functionality
-    console.log('Switching to language:', lang);
-    // Here you would implement actual language switching logic
+<style>
+/* Header Content - Más espaciado y delgado */
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.4rem 5rem;
+    background: white;
+    width: 100%;
+    box-sizing: border-box;
+    gap: 3rem;
 }
 
-// Set active navigation based on current page
-document.addEventListener('DOMContentLoaded', function() {
-    // Remove active class from all nav links
-    const navLinks = document.querySelectorAll('.nav a');
-    navLinks.forEach(link => link.classList.remove('active'));
-    
-    // Get current page filename
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    
-    // Set active class based on current page
-    if (currentPage === 'index.html' || currentPage === '') {
-        document.getElementById('home-link').classList.add('active');
-    } else if (currentPage === 'services.html') {
-        document.getElementById('services-link').classList.add('active');
-    } else if (currentPage === 'about.html') {
-        document.getElementById('about-link').classList.add('active');
-    } else if (currentPage === 'contact.html') {
-        document.getElementById('contact-link').classList.add('active');
+/* Logo bien a la izquierda */
+.logo {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1E4E8C;
+    text-decoration: none;
+    flex: 0 0 auto;
+}
+
+/* Navegación con más espacio */
+.nav {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 3rem;
+    align-items: center;
+}
+
+.nav li {
+    margin: 0;
+    position: relative;
+}
+
+.nav a {
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 0.3rem 0;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.nav a:hover,
+.nav a.active {
+    color: #1E4E8C;
+}
+
+/* Header Actions con más separación */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex: 0 0 auto;
+}
+
+/* Dropdown Menu Styles - Alineado correctamente */
+.dropdown {
+    position: relative;
+}
+
+.dropdown-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: #333 !important;
+    text-decoration: none !important;
+    font-weight: 500 !important;
+    font-size: 1rem !important;
+    padding: 0.5rem 0 !important;
+}
+
+.dropdown-arrow {
+    font-size: 0.7rem;
+    transition: transform 0.3s ease;
+    margin-left: 0.2rem;
+}
+
+.dropdown:hover .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.dropdown:hover .dropdown-toggle {
+    color: #1E4E8C !important;
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    min-width: 180px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1001;
+    list-style: none;
+    padding: 0.5rem 0;
+    margin: 0;
+}
+
+.dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Mobile dropdown toggle */
+.dropdown.show .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu li {
+    margin: 0;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 0.8rem 1.2rem;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}
+
+.dropdown-menu a:hover {
+    background: rgba(30, 78, 140, 0.1);
+    border-left-color: #1E4E8C;
+    color: #1E4E8C;
+}
+
+/* Language Switch - Bien visible */
+.lang-switch {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.lang-switch a {
+    color: #666;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    padding: 0.3rem 0.5rem;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.lang-switch a:hover {
+    color: #1E4E8C;
+    background: rgba(30, 78, 140, 0.1);
+}
+
+.lang-switch a.active {
+    color: #1E4E8C;
+    background: rgba(30, 78, 140, 0.15);
+    font-weight: 700;
+}
+
+/* Pre-Approval Button Styles - Más a la derecha */
+.btn-pre-approval {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.8rem 1.6rem;
+    background: linear-gradient(135deg, #FFD700 0%, #FF8C00 100%);
+    color: #1E4E8C;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 800;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+    border: 2px solid #FFD700;
+    animation: pulse-glow 2s infinite;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+}
+
+.btn-pre-approval:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 25px rgba(255, 140, 0, 0.5);
+    background: linear-gradient(135deg, #FFD700 0%, #FF6347 100%);
+    border-color: #FF8C00;
+}
+
+.btn-pre-approval .btn-icon {
+    font-size: 1.2rem;
+    animation: bounce 1.5s infinite;
+}
+
+.btn-pre-approval .btn-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.btn-pre-approval .btn-text strong {
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    font-weight: 900;
+}
+
+.btn-pre-approval .btn-text small {
+    font-size: 0.8rem;
+    opacity: 0.9;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0.2px;
+}
+
+.btn-pre-approval .btn-arrow {
+    font-size: 1.1rem;
+    transition: transform 0.3s ease;
+    font-weight: bold;
+}
+
+.btn-pre-approval:hover .btn-arrow {
+    transform: translateX(5px);
+}
+
+/* Animations - Más Intensas */
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
     }
-});
-</script>
+    50% {
+        box-shadow: 0 4px 20px rgba(255, 140, 0, 0.6);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-3px);
+    }
+    60% {
+        transform: translateY(-1px);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header-content {
+        padding: 0.3rem 2rem;
+        position: relative;
+    }
+    
+    nav {
+        position: static;
+        transform: none;
+        order: 2;
+    }
+    
+    .logo {
+        order: 1;
+        font-size: 1.5rem;
+    }
+    
+    .header-actions {
+        order: 3;
+        gap: 1rem;
+    }
+    
+    .nav {
+        gap: 1.5rem;
+    }
+    
+    .nav a {
+        font-size: 0.9rem;
+        padding: 0.2rem 0;
+    }
+    
+    .dropdown-menu {
+        min-width: 150px;
+    }
+    
+    .btn-pre-approval {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.85rem;
+        gap: 0.5rem;
+    }
+    
+    .btn-pre-approval .btn-text strong {
+        font-size: 0.85rem;
+    }
+    
+    .btn-pre-approval .btn-text small {
+        font-size: 0.65rem;
+    }
+    
+    .btn-pre-approval .btn-icon {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-content {
+        padding: 0.25rem 1rem;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .logo {
+        font-size: 1.3rem;
+    }
+    
+    .nav {
+        gap: 1rem;
+        width: 100%;
+        justify-content: center;
+        order: 3;
+    }
+    
+    .header-actions {
+        order: 2;
+        gap: 0.8rem;
+    }
+    
+    .nav a {
+        font-size: 0.8rem;
+    }
+    
+    .dropdown-menu {
+        right: 0;
+        left: auto;
+        min-width: 120px;
+    }
+    
+    .dropdown-menu a {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.85rem;
+    }
+    
+    .btn-pre-approval {
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+    }
+    
+    .btn-pre-approval .btn-text strong {
+        font-size: 0.75rem;
+    }
+    
+    .btn-pre-approval .btn-text small {
+        display: none;
+    }
+    
+    .btn-pre-approval .btn-icon {
+        font-size: 0.9rem;
+    }
+}
+</style>
+
+<!-- JavaScript moved to separate file: assets/js/language-switcher.js -->

@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Califícanos - Listo Para Hipoteca</title>
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <div id="header-placeholder"></div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Califícanos</h1>
+            <p>Tu opinión nos ayuda a mejorar y ayudar a más familias</p>
+        </div>
+    </section>
+
+    <!-- Rating Content -->
+    <section class="rating-detail">
+        <div class="container">
+            <div class="rating-content">
+                <div class="rating-intro">
+                    <h2>¿Cómo Fue Tu Experiencia?</h2>
+                    <p>Nos encantaría conocer tu opinión sobre nuestros servicios. Tu feedback nos ayuda a mejorar continuamente y a brindar el mejor servicio a todas las familias que confían en nosotros.</p>
+                </div>
+
+                <!-- Rating Form -->
+                <div class="rating-form">
+                    <form id="rating-form">
+                        <div class="form-group">
+                            <label>Calificación General</label>
+                            <div class="star-rating">
+                                <input type="radio" name="rating" value="5" id="star5">
+                                <label for="star5">★</label>
+                                <input type="radio" name="rating" value="4" id="star4">
+                                <label for="star4">★</label>
+                                <input type="radio" name="rating" value="3" id="star3">
+                                <label for="star3">★</label>
+                                <input type="radio" name="rating" value="2" id="star2">
+                                <label for="star2">★</label>
+                                <input type="radio" name="rating" value="1" id="star1">
+                                <label for="star1">★</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="service-type">¿Qué servicio utilizaste?</label>
+                            <select id="service-type" name="service-type" required>
+                                <option value="">Selecciona un servicio</option>
+                                <option value="pre-approval">Pre-Aprobación</option>
+                                <option value="refinance">Refinanciamiento</option>
+                                <option value="first-time">Primera Casa</option>
+                                <option value="commercial">Préstamo Comercial</option>
+                                <option value="consultation">Consulta/Asesoría</option>
+                                <option value="other">Otro</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="name">Tu Nombre (Opcional)</label>
+                            <input type="text" id="name" name="name" placeholder="Ej: María García">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="review">Cuéntanos tu experiencia</label>
+                            <textarea id="review" name="review" rows="5" placeholder="Describe tu experiencia con nuestros servicios..." required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email (Para seguimiento)</label>
+                            <input type="email" id="email" name="email" placeholder="tu@email.com">
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <input type="checkbox" id="allow-publish" name="allow-publish">
+                            <label for="allow-publish">Permito que publiquen mi reseña en su sitio web</label>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Enviar Calificación</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Review Guidelines -->
+            <div class="review-guidelines">
+                <h3>Pautas para Reseñas</h3>
+                <ul>
+                    <li>✓ Sé honesto y específico sobre tu experiencia</li>
+                    <li>✓ Menciona aspectos específicos del servicio</li>
+                    <li>✓ Mantén un tono profesional y constructivo</li>
+                    <li>✓ Tu reseña ayudará a otras familias a tomar decisiones</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Existing Reviews -->
+    <section class="existing-reviews">
+        <div class="container">
+            <h2>Lo Que Dicen Nuestros Clientes</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="rating">★★★★★</div>
+                    <div class="testimonial-content">
+                        <p>"Excelente servicio desde el primer contacto. El proceso fue transparente y Sonia siempre estuvo disponible para responder mis preguntas."</p>
+                    </div>
+                    <div class="testimonial-header">
+                        <div class="client-info">
+                            <h4>María G.</h4>
+                            <span>Pre-Aprobación • Hace 2 semanas</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="rating">★★★★★</div>
+                    <div class="testimonial-content">
+                        <p>"Refinancié mi casa y ahora pago menos. El proceso fue rápido y sin complicaciones. Muy recomendado."</p>
+                    </div>
+                    <div class="testimonial-header">
+                        <div class="client-info">
+                            <h4>Carlos R.</h4>
+                            <span>Refinanciamiento • Hace 1 mes</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="rating">★★★★★</div>
+                    <div class="testimonial-content">
+                        <p>"Como compradora primeriza estaba nerviosa, pero el equipo me explicó todo paso a paso. Ahora tengo las llaves de mi primera casa!"</p>
+                    </div>
+                    <div class="testimonial-header">
+                        <div class="client-info">
+                            <h4>Ana L.</h4>
+                            <span>Primera Casa • Hace 3 semanas</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Other Platforms -->
+    <section class="review-platforms">
+        <div class="container">
+            <h2>También Puedes Calificarnos En:</h2>
+            <div class="platforms-grid">
+                <a href="#" class="platform-link" target="_blank">
+                    <div class="platform-icon">G</div>
+                    <span>Google Reviews</span>
+                </a>
+                <a href="#" class="platform-link" target="_blank">
+                    <div class="platform-icon">f</div>
+                    <span>Facebook</span>
+                </a>
+                <a href="#" class="platform-link" target="_blank">
+                    <div class="platform-icon">⭐</div>
+                    <span>Yelp</span>
+                </a>
+                <a href="#" class="platform-link" target="_blank">
+                    <div class="platform-icon">B</div>
+                    <span>Better Business Bureau</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="assets/js/includes.js"></script>
+    <script src="assets/js/main.js"></script>
+    
+    <script>
+        // Rating form functionality
+        document.getElementById('rating-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(this);
+            const rating = formData.get('rating');
+            
+            if (!rating) {
+                alert('Por favor selecciona una calificación');
+                return;
+            }
+            
+            // Simulate form submission
+            const submitBtn = this.querySelector('button[type="submit"]');
+            submitBtn.textContent = 'Enviando...';
+            submitBtn.disabled = true;
+            
+            setTimeout(() => {
+                alert('¡Gracias por tu calificación! Tu opinión es muy importante para nosotros.');
+                this.reset();
+                submitBtn.textContent = 'Enviar Calificación';
+                submitBtn.disabled = false;
+            }, 2000);
+        });
+
+        // Star rating interaction
+        const stars = document.querySelectorAll('.star-rating input');
+        const starLabels = document.querySelectorAll('.star-rating label');
+
+        stars.forEach((star, index) => {
+            star.addEventListener('change', function() {
+                const rating = this.value;
+                starLabels.forEach((label, labelIndex) => {
+                    if (labelIndex >= 5 - rating) {
+                        label.style.color = '#FFD700';
+                    } else {
+                        label.style.color = '#ddd';
+                    }
+                });
+            });
+        });
+    </script>
+
+    <style>
+        .star-rating {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: flex-end;
+            gap: 0.2rem;
+            margin: 1rem 0;
+        }
+
+        .star-rating input {
+            display: none;
+        }
+
+        .star-rating label {
+            font-size: 2rem;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: #FFD700;
+        }
+
+        .star-rating input:checked ~ label {
+            color: #FFD700;
+        }
+
+        .review-guidelines ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .review-guidelines li {
+            padding: 0.5rem 0;
+            color: #666;
+        }
+
+        .platforms-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .platform-link {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+
+        .platform-link:hover {
+            background: #f8f9fa;
+            border-color: #1E4E8C;
+        }
+
+        .platform-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #1E4E8C;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</body>
+</html>
