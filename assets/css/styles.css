@@ -34,7 +34,7 @@ body {
     padding: 1.5rem 2rem;
     max-width: 1200px;
     margin: 0 auto;
-    min-height: 70px;
+    min-height: 90px;
     gap: 2rem;
 }
 
@@ -45,6 +45,14 @@ body {
     text-decoration: none;
     flex: 0 0 auto;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    height: 80px;
+    width: auto;
+    display: block;
 }
 
 .nav {
@@ -467,6 +475,10 @@ body {
     .logo {
         font-size: 1.6rem;
         order: 1;
+    }
+    
+    .logo-img {
+        height: 65px;
     }
     
     .nav {

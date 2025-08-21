@@ -138,8 +138,8 @@ function updateHeaderLanguage(lang) {
     const translations = headerTranslations[lang];
     
     // Actualizar logo
-    const logo = document.querySelector('.logo');
-    if (logo) logo.textContent = translations.logo;
+    // const logo = document.querySelector('.logo');
+    // if (logo) logo.textContent = translations.logo; // Logo is now an image, no text to update
     
     // Actualizar navegación
     const homeLink = document.getElementById('home-link');
