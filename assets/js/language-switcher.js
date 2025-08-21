@@ -34,6 +34,16 @@ const headerTranslations = {
     }
 };
 
+// URLs de formularios especiales por idioma
+const specialLinks = {
+    en: {
+        rateMeForm: "https://forms.gle/TWeCqybgrkT9fXDW6"
+    },
+    es: {
+        rateMeForm: "https://forms.gle/24wCq3YCUmyFo7Fr9"
+    }
+};
+
 // Traducciones del footer
 const footerTranslations = {
     en: {
@@ -233,7 +243,10 @@ function updateFooterLinks(lang) {
         if (refinancingLink) refinancingLink.href = 'services-es.html';
         
         const rateAnalysisLink = document.getElementById('footer-rate-analysis');
-        if (rateAnalysisLink) rateAnalysisLink.href = 'rate-me-es.html';
+        if (rateAnalysisLink) {
+            rateAnalysisLink.href = specialLinks.es.rateMeForm;
+            rateAnalysisLink.target = '_blank';
+        }
         
         const aboutLink = document.getElementById('footer-about');
         if (aboutLink) aboutLink.href = 'about-es.html';
@@ -253,7 +266,10 @@ function updateFooterLinks(lang) {
         if (refinancingLink) refinancingLink.href = 'services.html';
         
         const rateAnalysisLink = document.getElementById('footer-rate-analysis');
-        if (rateAnalysisLink) rateAnalysisLink.href = 'rate-me.html';
+        if (rateAnalysisLink) {
+            rateAnalysisLink.href = specialLinks.en.rateMeForm;
+            rateAnalysisLink.target = '_blank';
+        }
         
         const aboutLink = document.getElementById('footer-about');
         if (aboutLink) aboutLink.href = 'about.html';
@@ -286,7 +302,8 @@ function updatePageLinks(lang) {
         if (contactLink) contactLink.href = 'contact-es.html';
         if (dropdownLinks.length >= 3) {
             dropdownLinks[0].href = 'services-es.html';
-            dropdownLinks[2].href = 'rate-me-es.html';
+            dropdownLinks[2].href = specialLinks.es.rateMeForm;
+            dropdownLinks[2].target = '_blank';
         }
         if (preApprovalBtn) preApprovalBtn.href = 'pre-approval-es.html';
     } else {
@@ -297,7 +314,8 @@ function updatePageLinks(lang) {
         if (contactLink) contactLink.href = 'contact.html';
         if (dropdownLinks.length >= 3) {
             dropdownLinks[0].href = 'services.html';
-            dropdownLinks[2].href = 'rate-me.html';
+            dropdownLinks[2].href = specialLinks.en.rateMeForm;
+            dropdownLinks[2].target = '_blank';
         }
         if (preApprovalBtn) preApprovalBtn.href = 'pre-approval.html';
     }
