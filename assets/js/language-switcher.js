@@ -326,53 +326,64 @@ function updatePageLanguage(lang) {
 
 // Inicialización cuando se carga el header
 function initializeLanguageSwitcher() {
-    // Determinar idioma actual basado en la URL
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    const isSpanishPage = currentPage.includes('-es.html');
-    const currentLanguage = isSpanishPage ? 'es' : 'en';
-    
-    // Guardar idioma detectado
-    localStorage.setItem('selectedLanguage', currentLanguage);
-    
-    // Actualizar indicadores de idioma activo
-    const enBtn = document.getElementById('en-btn');
-    const esBtn = document.getElementById('es-btn');
-    
-    if (enBtn) enBtn.classList.remove('active');
-    if (esBtn) esBtn.classList.remove('active');
-    
-    if (currentLanguage === 'es') {
-        if (esBtn) esBtn.classList.add('active');
-        updateHeaderLanguage('es');
-        updateFooterLanguage('es');
-    } else {
-        if (enBtn) enBtn.classList.add('active');
-        updateHeaderLanguage('en');
-        updateFooterLanguage('en');
-    }
-    
-    console.log('Page loaded:', currentPage, 'Language detected:', currentLanguage);
-    
-    // Agregar event listeners para los botones de idioma
-    if (enBtn) {
-        enBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            console.log('EN button clicked');
-            window.switchLanguage('en');
-            return false;
-        });
-    }
-    
-    if (esBtn) {
-        esBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            console.log('ES button clicked');
-            window.switchLanguage('es');
-            return false;
-        });
-    }
+    try {
+        console.log('Initializing language switcher...');
+        
+        // Determinar idioma actual basado en la URL
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        const isSpanishPage = currentPage.includes('-es.html');
+        const currentLanguage = isSpanishPage ? 'es' : 'en';
+        
+        console.log('Current page:', currentPage, 'Language:', currentLanguage);
+        
+        // Guardar idioma detectado
+        localStorage.setItem('selectedLanguage', currentLanguage);
+        
+        // Actualizar indicadores de idioma activo
+        const enBtn = document.getElementById('en-btn');
+        const esBtn = document.getElementById('es-btn');
+        
+        if (enBtn && esBtn) {
+            enBtn.classList.remove('active');
+            esBtn.classList.remove('active');
+            
+            if (currentLanguage === 'es') {
+                esBtn.classList.add('active');
+                console.log('Setting Spanish as active language');
+                updateHeaderLanguage('es');
+                updateFooterLanguage('es');
+            } else {
+                enBtn.classList.add('active');
+                console.log('Setting English as active language');
+                updateHeaderLanguage('en');
+                updateFooterLanguage('en');
+            }
+        } else {
+            console.warn('Language buttons not found');
+        }
+        
+        console.log('Page loaded:', currentPage, 'Language detected:', currentLanguage);
+        
+        // Agregar event listeners para los botones de idioma
+        if (enBtn) {
+            enBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('EN button clicked');
+                window.switchLanguage('en');
+                return false;
+            });
+        }
+        
+        if (esBtn) {
+            esBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log('ES button clicked');
+                window.switchLanguage('es');
+                return false;
+            });
+        }
     
     // Set active navigation based on current page
     const navLinks = document.querySelectorAll('.nav a');
@@ -435,10 +446,36 @@ function initializeLanguageSwitcher() {
             });
         }
     }
+    
+    } catch (error) {
+        console.error('Error in initializeLanguageSwitcher:', error);
+    }
 }
 
 // Esperar a que el header se cargue completamente
 document.addEventListener('DOMContentLoaded', function() {
-    // Esperar un poco para que el header se cargue
-    setTimeout(initializeLanguageSwitcher, 500);
+    // Intentar múltiples veces hasta que el header esté cargado
+    let attempts = 0;
+    const maxAttempts = 10;
+    
+    function tryInitialize() {
+        attempts++;
+        console.log(`Attempt ${attempts}: Trying to initialize language switcher`);
+        
+        const enBtn = document.getElementById('en-btn');
+        const esBtn = document.getElementById('es-btn');
+        
+        if (enBtn && esBtn) {
+            console.log('Header buttons found, initializing language switcher');
+            initializeLanguageSwitcher();
+        } else if (attempts < maxAttempts) {
+            console.log('Header buttons not found, retrying in 500ms');
+            setTimeout(tryInitialize, 500);
+        } else {
+            console.error('Failed to find header buttons after maximum attempts');
+        }
+    }
+    
+    // Empezar a intentar después de un pequeño delay
+    setTimeout(tryInitialize, 100);
 });
