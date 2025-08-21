@@ -60,8 +60,7 @@ const footerTranslations = {
             title: "Company",
             aboutUs: "About Me",
             ourServices: "Our Services",
-            contact: "Contact",
-            privacy: "Privacy Policy"
+            contact: "Contact"
         },
         contact: {
             title: "Contact"
@@ -82,8 +81,7 @@ const footerTranslations = {
             title: "Empresa",
             aboutUs: "Sobre Mí",
             ourServices: "Nuestros Servicios",
-            contact: "Contacto",
-            privacy: "Política de Privacidad"
+            contact: "Contacto"
         },
         contact: {
             title: "Contacto"
@@ -216,9 +214,6 @@ function updateFooterLanguage(lang) {
     
     const contactLink = document.getElementById('footer-contact');
     if (contactLink) contactLink.textContent = translations.company.contact;
-    
-    const privacyLink = document.getElementById('footer-privacy');
-    if (privacyLink) privacyLink.textContent = translations.company.privacy;
     
     // Actualizar sección Contact
     const contactTitle = document.getElementById('footer-contact-title');
