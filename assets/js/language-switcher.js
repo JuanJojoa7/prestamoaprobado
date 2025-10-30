@@ -47,7 +47,7 @@ const specialLinks = {
 // Traducciones del footer
 const footerTranslations = {
     en: {
-        companyName: "Ready To Mortgage",
+        companyName: "Ready To Mortgage LLC NMLS # 2579964",
         description: "Your trusted partner in securing the best mortgage rates and financing for your dream home. We provide expert guidance in both English and Spanish to make your home financing journey smooth and successful.",
         services: {
             title: "Services",
@@ -65,10 +65,10 @@ const footerTranslations = {
         contact: {
             title: "Contact"
         },
-        copyright: "© 2025 Ready To Mortgage. All rights reserved."
+        copyright: "© 2025 Ready To Mortgage LLC NMLS # 2579964. All rights reserved."
     },
     es: {
-        companyName: "Ready To Mortgage",
+        companyName: "Ready To Mortgage LLC NMLS # 2579964",
         description: "Tu socio de confianza para asegurar las mejores tasas hipotecarias y financiamiento para la casa de tus sueños. Brindamos orientación experta en inglés y español para hacer que tu proceso de financiamiento sea fluido y exitoso.",
         services: {
             title: "Servicios",
@@ -86,7 +86,7 @@ const footerTranslations = {
         contact: {
             title: "Contacto"
         },
-        copyright: "© 2025 Ready To Mortgage. Todos los derechos reservados."
+        copyright: "© 2025 Ready To Mortgage LLC NMLS # 2579964. Todos los derechos reservados."
     }
 };
 
