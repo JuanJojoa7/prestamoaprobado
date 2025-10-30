@@ -8,7 +8,6 @@ const headerTranslations = {
             about: "About",
             contact: "Contact",
             allServices: "All Services",
-            calculator: "Calculator",
             rateMe: "Rate Me"
         },
         preApproval: {
@@ -24,7 +23,6 @@ const headerTranslations = {
             about: "Sobre Mí",
             contact: "Contacto",
             allServices: "Todos los Servicios",
-            calculator: "Calculadora",
             rateMe: "Califícame"
         },
         preApproval: {
