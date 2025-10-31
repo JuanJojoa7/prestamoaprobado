@@ -293,10 +293,11 @@ function updatePageLinks(lang) {
         if (servicesLink) servicesLink.href = 'services-es.html';
         if (aboutLink) aboutLink.href = 'about-es.html';
         if (contactLink) contactLink.href = 'contact-es.html';
-        if (dropdownLinks.length >= 3) {
+        // Dropdown: [0] = Todos los Servicios, [1] = Califícame
+        if (dropdownLinks.length >= 2) {
             dropdownLinks[0].href = 'services-es.html';
-            dropdownLinks[2].href = specialLinks.es.rateMeForm;
-            dropdownLinks[2].target = '_blank';
+            dropdownLinks[1].href = specialLinks.es.rateMeForm;
+            dropdownLinks[1].target = '_blank';
         }
         if (preApprovalBtn) preApprovalBtn.href = 'pre-approval-es.html';
     } else {
@@ -305,10 +306,11 @@ function updatePageLinks(lang) {
         if (servicesLink) servicesLink.href = 'services.html';
         if (aboutLink) aboutLink.href = 'about.html';
         if (contactLink) contactLink.href = 'contact.html';
-        if (dropdownLinks.length >= 3) {
+        // Dropdown: [0] = All Services, [1] = Rate Me
+        if (dropdownLinks.length >= 2) {
             dropdownLinks[0].href = 'services.html';
-            dropdownLinks[2].href = specialLinks.en.rateMeForm;
-            dropdownLinks[2].target = '_blank';
+            dropdownLinks[1].href = specialLinks.en.rateMeForm;
+            dropdownLinks[1].target = '_blank';
         }
         if (preApprovalBtn) preApprovalBtn.href = 'pre-approval.html';
     }
