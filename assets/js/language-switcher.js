@@ -361,6 +361,19 @@ function initializeLanguageSwitcher() {
         } else {
             console.warn('Language buttons not found');
         }
+        // Ensure footer gets updated once it's injected via includes
+        const footerContainer = document.getElementById('footer');
+        if (footerContainer && typeof updateFooterLanguage === 'function') {
+            const footerObserver = new MutationObserver((mutations, obs) => {
+                const rateLink = document.getElementById('footer-rate-analysis');
+                if (rateLink) {
+                    const langToApply = localStorage.getItem('selectedLanguage') || (currentPage.includes('-es.html') ? 'es' : 'en');
+                    updateFooterLanguage(langToApply);
+                    obs.disconnect();
+                }
+            });
+            footerObserver.observe(footerContainer, { childList: true, subtree: true });
+        }
         
         console.log('Page loaded:', currentPage, 'Language detected:', currentLanguage);
         
