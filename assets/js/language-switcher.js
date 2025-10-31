@@ -8,6 +8,7 @@ const headerTranslations = {
             about: "About",
             contact: "Contact",
             allServices: "All Services",
+            calculator: "Calculator",
             rateMe: "Rate Me"
         },
         preApproval: {
@@ -23,6 +24,7 @@ const headerTranslations = {
             about: "Sobre Mí",
             contact: "Contacto",
             allServices: "Todos los Servicios",
+            calculator: "Calculadora",
             rateMe: "Califícame"
         },
         preApproval: {
@@ -156,10 +158,9 @@ function updateHeaderLanguage(lang) {
     
     // Actualizar dropdown
     const dropdownLinks = document.querySelectorAll('.dropdown-menu a');
-    if (dropdownLinks.length >= 3) {
+    if (dropdownLinks.length >= 2) {
         dropdownLinks[0].textContent = translations.nav.allServices;
-        dropdownLinks[1].textContent = translations.nav.calculator;
-        dropdownLinks[2].textContent = translations.nav.rateMe;
+        dropdownLinks[1].textContent = translations.nav.rateMe;
     }
     
     // Actualizar botón de pre-aprobación
@@ -194,8 +195,7 @@ function updateFooterLanguage(lang) {
     const refinancingLink = document.getElementById('footer-refinancing');
     if (refinancingLink) refinancingLink.textContent = translations.services.refinancing;
     
-    const calculatorLink = document.getElementById('footer-calculator');
-    if (calculatorLink) calculatorLink.textContent = translations.services.calculator;
+        // Calculator link removed
     
     const rateAnalysisLink = document.getElementById('footer-rate-analysis');
     if (rateAnalysisLink) rateAnalysisLink.textContent = translations.services.rateAnalysis;
